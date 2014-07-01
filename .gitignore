@@ -1,3 +1,14 @@
+# Cocos2d-x folders and files
+cocos2d/
+proj.android/
+proj.ios_mac/
+proj.linux/
+proj.win32/
+proj.wp8-xaml/
+publish/
+.cocos-project.json
+CMakeLists.txt
+
 # Compiled Object files
 *.slo
 *.lo

@@ -1,0 +1,76 @@
+#include "HelloWorldScene.h"
+#include "CCSGUIReader.h"
+#include "BattleScene\BattleScene.h"
+#include "OnlineScene.h"
+#include "HelpScene.h"
+#include "SingleMenuScene.h"
+
+USING_NS_CC;
+using namespace cocostudio;
+using namespace ui;
+
+bool HelloWorld::init()
+{
+    if ( !Scene::init() )
+    {
+        return false;
+    }
+    
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	
+	//Node* pNode = SceneReader::getInstance()->createNodeWithSceneFile("home/home.ExportJson");
+	//this->addChild(pNode);
+	// 获取精灵并执行操作
+	/*ComRender *render = (ComRender*)(pNode->getChildByTag(10008)->getComponent("CCArmature"));
+	Sprite *object = (Sprite*)(render->getNode());
+	object->runAction(MoveBy::create(5, Vec2(-1000, 0)));*/
+	// 获取UI组件并绑定事件监听
+	/*ComRender *render2 = (ComRender*)(pNode->getChildByTag(10010)->getComponent("GUIComponent"));
+	Widget *widget = (Widget*)(render2->getNode());
+	widget->addTouchEventListener(CC_CALLBACK_2(HelloWorld::touchEvent, this));*/
+
+	Widget *pNode = (Widget*)(GUIReader::getInstance()->widgetFromJsonFile("home.ExportJson"));
+	this->addChild(pNode);
+	Button *single = (Button*)(ui::Helper::seekWidgetByName(pNode, "Info_btn"));
+	single->addTouchEventListener(CC_CALLBACK_2(HelloWorld::singleEvent, this));
+	Button *online = (Button*)(ui::Helper::seekWidgetByName(pNode, "more_games_btn"));
+	online->addTouchEventListener(CC_CALLBACK_2(HelloWorld::onlineEvent, this));
+	Button *help = (Button*)(ui::Helper::seekWidgetByName(pNode, "Help_btn"));
+	help->addTouchEventListener(CC_CALLBACK_2(HelloWorld::helpEvent, this));
+
+    return true;
+}
+
+void HelloWorld::singleEvent(Ref *pSender, Widget::TouchEventType type)
+{
+	switch(type){
+	case Widget::TouchEventType::ENDED:
+		Scene *menu = SingleMenuScene::create();
+		TransitionScene *transition = TransitionFade::create(0.5, menu);
+		Director::getInstance()->pushScene(transition);
+		break;
+	}	
+}
+
+void HelloWorld::onlineEvent(Ref *pSender, Widget::TouchEventType type)
+{
+	switch(type){
+	case Widget::TouchEventType::ENDED:
+		Scene *online = OnlineScene::create();
+		TransitionScene *transition = TransitionFade::create(0.5, online);
+		Director::getInstance()->pushScene(transition);
+		break;
+	}
+}
+
+void HelloWorld::helpEvent(Ref *pSender, Widget::TouchEventType type)
+{
+	switch(type){
+	case Widget::TouchEventType::ENDED:
+		Scene *help = HelpScene::create(); 
+		TransitionScene *transition = TransitionFade::create(0.5, help);
+		Director::getInstance()->pushScene(transition);
+		break;
+	}
+}
