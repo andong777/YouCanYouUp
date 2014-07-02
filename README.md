@@ -1,5 +1,4 @@
 YouCanYouUp
 ===========
 
-
-A mobile game using Cocos2d-x
+A mobile game using Cocos2d-x.
