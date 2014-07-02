@@ -1,5 +1,6 @@
 #pragma once
 #include "cocos2d.h"
+#include "CharacterParameter.h"
 USING_NS_CC;
 
 class Character
@@ -20,8 +21,8 @@ private:
 	int max_health;
 
 public:
-	Character(const std::string &filename,Point p);
-	Character(Point p);
+	Character(GameSetting::Character character);
+	Character();
 	~Character(void);
 	//返回角色的精灵指针
 	Sprite* getSprite();
@@ -32,11 +33,7 @@ public:
 	//返回角色位置
 	Vec2 getPosition();
 
-	/*
-	//设置角色上次受力
-	void setLastForce(Vec2 newForce);
-	//返回角色上次受力
-	Vec2 getLastForce();
-	*/
+	//设置角色位置
+	void setPosition(Vec2 pos);
 };
 

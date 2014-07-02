@@ -15,10 +15,12 @@ private:
 	//Layer* characterLayer;
 	//初始化
 	virtual bool init();
+
 	static Layer* selectMap(GameSetting::Map map); 
+
 public:
 	//创建场景
-	static Scene* createScene(GameSetting::Map map);
+	static Scene* createScene(GameSetting::Map map, GameSetting::Character hero, std::vector<GameSetting::Character> enemy);
 	CREATE_FUNC(BattleScene);
 };
 

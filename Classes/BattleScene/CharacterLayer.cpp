@@ -1,15 +1,9 @@
 #include "CharacterLayer.h"
 
-
-bool CharacterLayer:: init(){
-	//操作角色
-	hero = new Character("Character/monster1.png",Point(300,500));
-	this->addChild(hero->getSprite());
-	//敌人角色
-	enemy = new Character(Point(450,500));
-	this->addChild(enemy->getSprite());
-	enemyAI = new EnemyAI(enemy);
-
+bool CharacterLayer:: init()
+{
+	//*enemy = new Character[3];
+	//enemyAI = new EnemyAI(enemy);
 
 	//触屏事件监听
 	auto dispatcher = Director::getInstance()->getEventDispatcher();
@@ -20,10 +14,8 @@ bool CharacterLayer:: init(){
 	listener->setSwallowTouches(true);//不向下传递触摸
 	dispatcher->addEventListenerWithSceneGraphPriority(listener,this);
 
-
 	//定时判断角色状态
-	this->schedule(schedule_selector(CharacterLayer::scheduleCallBack), 0.2f);  
-
+	this->schedule(schedule_selector(CharacterLayer::scheduleCallBack), 1.f);  
 
 	return true;
 }
@@ -57,14 +49,38 @@ void CharacterLayer::CheckResult(){
 void CharacterLayer::Rebirth(Character* cha,Point birthPoint){
 	this->removeChild(cha->getSprite(),false);
 	delete cha;
-	cha= new Character("Character/monster1.png",birthPoint);
+	cha= new Character(GameSetting::Character::CHARACTER1);
+	cha->setPosition(Vec2(300,500));
 	this->addChild(cha->getSprite());
 }
 
 
-
 CharacterLayer::~CharacterLayer(){
 	delete hero;
-	delete enemy;
-	delete enemyAI;
+	/*for(int i=0;i<sizeof(enemy)/sizeof(Character);i++)
+	{
+		delete enemy[i];
+	}
+	delete enemy;*/
 }
+
+void CharacterLayer::setHero(GameSetting::Character hero)
+{
+	//操作角色
+	this->hero = new Character(hero);
+	this->hero->setPosition(Vec2(300,500));
+	this->addChild(this->hero->getSprite());
+}
+
+void CharacterLayer::setEnemy(std::vector<GameSetting::Character> enemy)
+{
+	//敌人角色
+	for(int i=0;i<enemy.size();i++)
+	{
+		this->enemy.push_back(Character(enemy[i]));
+		this->enemy[i].setPosition(Vec2(500,500));
+		this->addChild(this->enemy[i].getSprite());
+		enemyAI = new EnemyAI(&this->enemy[i]);	
+	}
+}
+

@@ -2,6 +2,8 @@
 #include "cocos2d.h"
 #include "Character.h"
 #include "EnemyAI.h"
+#include <vector>
+
 class CharacterLayer : public cocos2d::Layer
 {
 private:
@@ -10,7 +12,8 @@ private:
 	//操控角色
 	Character* hero;
 	//对手角色
-	Character* enemy;
+	//Character enemy[3];
+	std::vector<Character> enemy;
 	EnemyAI* enemyAI;
 	
 	//schedule调用函数
@@ -29,5 +32,8 @@ public:
 	virtual bool init();  
 	~CharacterLayer();
 	CREATE_FUNC(CharacterLayer);
+
+	void setHero(GameSetting::Character hero);
+	void setEnemy(std::vector<GameSetting::Character> enemy);
 };
 

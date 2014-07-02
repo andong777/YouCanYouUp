@@ -1,36 +1,34 @@
 #include "Character.h"
-#include "CharacterParameter.h"
 
 //有图片的构造函数
-Character::Character(const std::string &filename,Point p)
+Character::Character(GameSetting::Character character)
 {
-	sprite = Sprite::create(filename); 
+	std::string res =CharacterParameter::getResource(character);
+	sprite = Sprite::create(res); 
 	sprite->setScale(0.3f);
-
 	body = PhysicsBody::createCircle(sprite->getContentSize().width *0.3/ 2);
-	/*
-	Vec2* polygonEdge = new Vec2[4];float w = sprite->getContentSize().width*0.3/2;
-	polygonEdge[0]= Vec2(-w,-w);polygonEdge[3]= Vec2(w,-w);polygonEdge[2]= Vec2(w,w);polygonEdge[1]= Vec2(-w,w);
-	body = PhysicsBody::createPolygon(polygonEdge,4,PHYSICSBODY_MATERIAL_DEFAULT,Vec2(0,0));
-	*/
+
+	//将刚体绑定在精灵上
 	sprite->setPhysicsBody(body);
-    sprite->setPosition(p);
+	//设置位置
+   // sprite->setPosition(p);
     
 	//设置刚体的shape的弹性
-	body->getShape(0)->setRestitution(CharacterParameter::character1_restitution);
+	body->getShape(0)->setRestitution(CharacterParameter::getRestitution(character));
 	//设置最大体力，初始体力与最大体力相同
-	max_health = CharacterParameter::character1_max_health;
+	max_health = CharacterParameter::getMaxHealth(character);
 	health = max_health;
 	//设置重力
-	body->setMass(CharacterParameter::character1_mass);
+	body->setMass(CharacterParameter::getMass(character));
 	
+
 }
 //没有图片的构造函数
-Character::Character(Point p){
+Character::Character(){
 	sprite = Sprite::create();
 	body = PhysicsBody::createCircle(40);
 	sprite->setPhysicsBody(body);
-    sprite->setPosition(p);
+   // sprite->setPosition(p);
 
 }
 
@@ -59,7 +57,13 @@ void Character::applyImpulse(Vec2 vec){
 
 Vec2 Character::getPosition(){
 	return body->getPosition();
+	//return this->getSprite()->getPhysicsBody()->getPosition();
 }
+
+void Character::setPosition(Vec2 pos){
+	sprite->setPosition(pos);
+}
+
 
 /*
 Vec2 Character::getLastForce(){

@@ -40,7 +40,10 @@ void SingleMenuScene::selectEvent(Ref *pSender, Widget::TouchEventType type)
 			map = GameSetting::Map::SNOW;
 		}
 
-		Scene *game = BattleScene::createScene(map);
+		std::vector<GameSetting::Character> enemy;
+		enemy.push_back(GameSetting::Character::CHARACTER1);
+		enemy.push_back(GameSetting::Character::CHARACTER2);
+		Scene *game = BattleScene::createScene(map, GameSetting::Character::CHARACTER1, enemy);
 		TransitionScene *transition = TransitionFade::create(0.5, game);
 		Director::getInstance()->replaceScene(transition);
 

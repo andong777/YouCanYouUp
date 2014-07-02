@@ -1,3 +1,4 @@
+#pragma once
 class GameSetting
 {
 public:
@@ -7,7 +8,8 @@ public:
 	};
 
 	enum class Character{
-		TEST
+		CHARACTER1,
+		CHARACTER2
 	};
 
 	enum class Map{
