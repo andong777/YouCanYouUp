@@ -1,9 +1,9 @@
 #include "MainScene.h"
 #include "CCSGUIReader.h"
-#include "BattleScene\BattleScene.h"
-#include "OnlineScene.h"
+#include "Battle\BattleScene.h"
+#include "Online\OnlineScene.h"
 #include "HelpScene.h"
-#include "SingleMenuScene.h"
+#include "Local\MapSelectScene.h"
 
 USING_NS_CC;
 using namespace cocostudio;
@@ -46,7 +46,7 @@ void MainScene::singleEvent(Ref *pSender, Widget::TouchEventType type)
 {
 	switch(type){
 	case Widget::TouchEventType::ENDED:
-		Scene *menu = SingleMenuScene::create();
+		Scene *menu = MapSelectScene::create();
 		TransitionScene *transition = TransitionFade::create(0.5, menu);
 		Director::getInstance()->pushScene(transition);
 		break;
