@@ -40,7 +40,7 @@ void MapSelectScene::selectEvent(Ref *pSender, Widget::TouchEventType type)
 		}
 
 		std::vector<GameSetting::Character> enemy;
-		enemy.push_back(GameSetting::Character::CHARACTER1);
+		enemy.push_back(GameSetting::Character::CHARACTER2);
 		enemy.push_back(GameSetting::Character::CHARACTER2);
 		Scene *game = BattleScene::createScene(mapSelected, charSelected, enemy);
 		TransitionScene *transition = TransitionFade::create(0.5, game);

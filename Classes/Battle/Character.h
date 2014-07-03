@@ -20,6 +20,9 @@ private:
 	//float mass;
 	int max_health;
 
+	// 这个人是谁？
+	GameSetting::Character who;
+
 public:
 	Character(GameSetting::Character character);
 	Character();
@@ -35,5 +38,7 @@ public:
 
 	//设置角色位置
 	void setPosition(Vec2 pos);
+
+	void init();
 };
 

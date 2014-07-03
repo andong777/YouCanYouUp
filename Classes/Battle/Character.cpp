@@ -3,6 +3,7 @@
 //有图片的构造函数
 Character::Character(GameSetting::Character character)
 {
+	who = character;
 	std::string res =CharacterParameter::getResource(character);
 	sprite = Sprite::create(res); 
 	sprite->setScale(0.3f);
@@ -15,13 +16,9 @@ Character::Character(GameSetting::Character character)
     
 	//设置刚体的shape的弹性
 	body->getShape(0)->setRestitution(CharacterParameter::getRestitution(character));
-	//设置最大体力，初始体力与最大体力相同
-	max_health = CharacterParameter::getMaxHealth(character);
-	health = max_health;
-	//设置重力
-	body->setMass(CharacterParameter::getMass(character));
 	
-
+	init();
+	
 }
 //没有图片的构造函数
 Character::Character(){
@@ -30,6 +27,15 @@ Character::Character(){
 	sprite->setPhysicsBody(body);
    // sprite->setPosition(p);
 
+}
+
+void Character::init()
+{
+	//设置最大体力，初始体力与最大体力相同
+	max_health = CharacterParameter::getMaxHealth(who);
+	health = max_health;
+	//设置重力
+	body->setMass(CharacterParameter::getMass(who));
 }
 
 Sprite* Character::getSprite(){

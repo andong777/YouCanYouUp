@@ -39,29 +39,34 @@ void CharacterLayer::scheduleCallBack(float fDelta){
 void CharacterLayer::CheckResult(){
 	float heroY = hero->getSprite()->getPositionY();
 	if(heroY<0){
-		CCLOG("you Lose");
+		CCLOG("you lose");
 		//Director::getInstance()->end();
 		Rebirth(hero,Point(400,500));
 	}
-	
+	for(auto e: enemy)
+	{
+		float enemyY = e.getSprite()->getPositionY();
+		if(enemyY<0){
+			CCLOG("you win");
+			//Director::getInstance()->end();
+			Rebirth(&e,Point(400,500));
+		}
+	}
 }
 
 void CharacterLayer::Rebirth(Character* cha,Point birthPoint){
-	this->removeChild(cha->getSprite(),false);
+	/*this->removeChild(cha->getSprite(),false);
 	delete cha;
-	cha= new Character(GameSetting::Character::CHARACTER1);
+	cha= new Character(GameSetting::Character::CHARACTER1);*/
+	cha->init();
 	cha->setPosition(Vec2(300,500));
-	this->addChild(cha->getSprite());
+	//this->addChild(cha->getSprite());
 }
 
 
 CharacterLayer::~CharacterLayer(){
 	delete hero;
-	/*for(int i=0;i<sizeof(enemy)/sizeof(Character);i++)
-	{
-		delete enemy[i];
-	}
-	delete enemy;*/
+	
 }
 
 void CharacterLayer::setHero(GameSetting::Character hero)
