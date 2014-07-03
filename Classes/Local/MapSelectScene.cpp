@@ -12,7 +12,7 @@ bool MapSelectScene::init()
 		return false;
 	}
 
-	Widget *pNode = (Widget*)(GUIReader::getInstance()->widgetFromJsonFile("single.ExportJson"));
+	Widget *pNode = (Widget*)(GUIReader::getInstance()->widgetFromJsonFile("mapUI.ExportJson"));
 	this->addChild(pNode);
 
 	Button *return_ = (Button*)(ui::Helper::seekWidgetByName(pNode, "Button_1"));
@@ -30,20 +30,19 @@ void MapSelectScene::selectEvent(Ref *pSender, Widget::TouchEventType type)
 	switch(type)
 	{
 	case Widget::TouchEventType::ENDED:
-		GameSetting::Map map = GameSetting::Map::DEFAULT;
 		if(pSender == defaultBtn)
 		{
-			map = GameSetting::Map::DEFAULT;
+			mapSelected = GameSetting::Map::DEFAULT;
 		}
 		else if(pSender == snowBtn)
 		{
-			map = GameSetting::Map::SNOW;
+			mapSelected = GameSetting::Map::SNOW;
 		}
 
 		std::vector<GameSetting::Character> enemy;
 		enemy.push_back(GameSetting::Character::CHARACTER1);
 		enemy.push_back(GameSetting::Character::CHARACTER2);
-		Scene *game = BattleScene::createScene(map, GameSetting::Character::CHARACTER1, enemy);
+		Scene *game = BattleScene::createScene(mapSelected, charSelected, enemy);
 		TransitionScene *transition = TransitionFade::create(0.5, game);
 		Director::getInstance()->replaceScene(transition);
 
@@ -57,4 +56,9 @@ void MapSelectScene::returnEvent(Ref *pSender, Widget::TouchEventType type)
 		Director::getInstance()->popScene();
 		break;
 	}	
+}
+
+void MapSelectScene::setCharSelected(GameSetting::Character cha)
+{
+	this->charSelected = cha;
 }

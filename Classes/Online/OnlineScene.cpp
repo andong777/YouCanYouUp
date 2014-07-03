@@ -1,6 +1,6 @@
 #include "OnlineScene.h"
 #include "CCSGUIReader.h"
-#include "BattleScene\BattleScene.h"
+#include "Battle\BattleScene.h"
 #include "RecordScene.h"
 #include "LoginScene.h"
 
@@ -38,7 +38,7 @@ void OnlineScene::pvpEvent(Ref *pSender, Widget::TouchEventType type)
 		Director::getInstance()->replaceScene(MatchingScene);*/
 		// Æ¥Åä¹¤×÷
 		Scene *game = BattleScene::create();
-		TransitionScene *transition = TransitionFade::create(1, game);
+		TransitionScene *transition = TransitionFade::create(0.5, game);
 		Director::getInstance()->replaceScene(transition);
 		break;
 	}	
@@ -49,7 +49,7 @@ void OnlineScene::recordEvent(Ref *pSender, Widget::TouchEventType type)
 	switch(type){
 	case Widget::TouchEventType::ENDED:
 		Scene *record = RecordScene::create();
-		TransitionScene *transition = TransitionFade::create(1, record);
+		TransitionScene *transition = TransitionFade::create(0.5, record);
 		Director::getInstance()->pushScene(transition);
 		break;
 	}	
@@ -60,7 +60,7 @@ void OnlineScene::offlineEvent(Ref *pSender, Widget::TouchEventType type)
 	switch(type){
 	case Widget::TouchEventType::ENDED:
 		Scene *login = LoginScene::create();
-		TransitionScene *transition = TransitionFade::create(1, login);
+		TransitionScene *transition = TransitionFade::create(0.5, login);
 		Director::getInstance()->pushScene(transition);
 		break;
 	}	
