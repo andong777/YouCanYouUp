@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 #pragma once
-=======
->>>>>>> origin/master
 class GameSetting
 {
 public:
