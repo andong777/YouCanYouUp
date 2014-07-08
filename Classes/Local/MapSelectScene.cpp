@@ -32,7 +32,7 @@ void MapSelectScene::selectEvent(Ref *pSender, Widget::TouchEventType type)
 	case Widget::TouchEventType::ENDED:
 		if(pSender == defaultBtn)
 		{
-			mapSelected = GameSetting::Map::DEFAULT;
+			mapSelected = GameSetting::Map::FOREST;
 		}
 		else if(pSender == snowBtn)
 		{
@@ -45,7 +45,6 @@ void MapSelectScene::selectEvent(Ref *pSender, Widget::TouchEventType type)
 		Scene *game = BattleScene::createScene(mapSelected, charSelected, enemy);
 		TransitionScene *transition = TransitionFade::create(0.5, game);
 		Director::getInstance()->replaceScene(transition);
-
 	}
 }
 

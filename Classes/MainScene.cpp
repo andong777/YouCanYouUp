@@ -14,6 +14,17 @@ bool MainScene::init()
     {
         return false;
     }
+
+	std::string textStr("1&203&712.43");
+	int begin = textStr.find_first_of("&");
+	int end = textStr.find_last_of("&");
+	CCLOG("%d, %d", begin, end);
+	//std::string num = textStr.substr(0, begin);
+	std::string s1 = textStr.substr(begin+1, end-begin-1);
+	float x = std::stod(s1);
+	std::string s2 = textStr.substr(end+1, textStr.length()-end-2);
+	float y = std::stod(s2);
+	//CCLOG("%s:(%d,%d)", num, x, y);
     
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();

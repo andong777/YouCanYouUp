@@ -1,9 +1,12 @@
 #pragma once
-#include "cocos2d.h"
-class SnowMapLayer:  public cocos2d::Layer
+//#include "cocos2d.h"
+#include "MapLayer.h"
+class SnowMapLayer:  public MapLayer
 {
 protected:
 	virtual bool init();  
+
+	void scheduleCallBack(float fDelta);
 
 public:
 	/*

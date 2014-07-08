@@ -16,6 +16,7 @@ public:
 	void helpEvent(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
     // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
+
 };
 
 #endif // __MAIN_SCENE_H__

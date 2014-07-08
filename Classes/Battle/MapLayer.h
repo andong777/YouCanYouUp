@@ -1,20 +1,18 @@
 #pragma once
 #include "cocos2d.h"
-
+//#include "ShapeType.h"
 class MapLayer:  public cocos2d::Layer
 {
+private:
+
+
 protected:
 	virtual bool init();  
-
+	
 public:
-	/*
-	MapLayer(void);
-	~MapLayer(void);
-	*/
+	bool ready;
+
 	CREATE_FUNC(MapLayer);
-
-	//void movePlate(float fDelta);
-
 
 };
 

@@ -1,23 +1,10 @@
-#include "SnowMapLayer.h"
+#include "ForestMapLayer.h"
 USING_NS_CC;
-/*
-MapLayer::MapLayer(void)
-{
-}
-
-
-MapLayer::~MapLayer(void)
-{
-}
-*/
-
-
-bool SnowMapLayer:: init(){
+bool ForestMapLayer:: init(){
 	if ( !MapLayer::init() )
     {
         return false;
     }
-
 
 
 
@@ -30,7 +17,7 @@ bool SnowMapLayer:: init(){
 	edgeNode->setPhysicsBody(body);
 	this->addChild(edgeNode);
 	*/
-	
+
 	//左，上，右边界
 	Vec2* edge =  new Vec2[4];
 	edge[0] = Vec2(0,0);
@@ -41,7 +28,7 @@ bool SnowMapLayer:: init(){
 	auto edgeNode = Node::create();
 	edgeNode->setPosition(Point(0,0));
 	edgeNode->setPhysicsBody(edgeBody);
-	this->addChild(edgeNode,0);
+	this->addChild(edgeNode);
 
 	//下方平台
 	Point* edgeDown = new Point[4];
@@ -56,17 +43,14 @@ bool SnowMapLayer:: init(){
 	edgeDown[2] = Point(visibleSize.width,0);
 	edgeDown[3] = Point(0,0);
 	*/
-	auto edgeDownBody = PhysicsBody::createCircle(visibleSize.height/2,PHYSICSBODY_MATERIAL_DEFAULT,Vec2(visibleSize.width/2,-visibleSize.height/4));
+	auto edgeDownBody = PhysicsBody::createPolygon(edgeDown,4,PHYSICSBODY_MATERIAL_DEFAULT,Vec2(0,0));
 	edgeDownBody->setDynamic(false);//不受力
 	auto edgeDownNode = Node::create();
 	edgeDownNode->setPosition(Point(0,0));
 	edgeDownNode->setPhysicsBody(edgeDownBody);
-	this->addChild(edgeDownNode,1);
-	edgeDownNode->setTag(1);
+	this->addChild(edgeDownNode);
 	//edgeDownBody->getShape(0)->setFriction(300);  //设置摩擦力
 
-
-	/*
 	//平台
 	PhysicsBody* plates[4];
 	Node* plateNodes[4];
@@ -82,7 +66,6 @@ bool SnowMapLayer:: init(){
 	plateNodes[1]->setPosition(Point(visibleSize.width*3/4,visibleSize.height*3/4));
 	plateNodes[2]->setPosition(Point(visibleSize.width/4,visibleSize.height*3/4));
 	plateNodes[3]->setPosition(Point(visibleSize.width*3/4,visibleSize.height/3));
-	*/
 
 	/*移动平台
 	mPlate = PhysicsBody::createBox(visibleSize/6,PHYSICSBODY_MATERIAL_DEFAULT);
@@ -96,13 +79,5 @@ bool SnowMapLayer:: init(){
 	//mPlateNode->setPositionY(10);
 	*/
 
-	this->schedule(schedule_selector(SnowMapLayer::scheduleCallBack), 0.2f);  
-
 	return true;
-}
-
-
-//int i=0;
-void SnowMapLayer::scheduleCallBack(float fDelta){
-	
 }

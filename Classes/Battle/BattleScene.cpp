@@ -20,6 +20,9 @@ Scene* BattleScene::createScene(GameSetting::Map map, GameSetting::Character her
 	scene->addChild(mapLayer);
 	scene->addChild(characterLayer);
 
+	//mapLayer->ready = true;
+	characterLayer->ready = true;
+
 	//设置物理世界刚体可见
 	scene->getPhysicsWorld()->setDebugDrawMask(true);
 	//设置物理世界的重力和倍速
@@ -35,8 +38,8 @@ bool BattleScene::init(){
 }
 
 Layer* BattleScene::selectMap(GameSetting::Map map){
-	if(map==GameSetting::Map::DEFAULT){
-		return MapLayer::create();
+	if(map==GameSetting::Map::FOREST){
+		return ForestMapLayer::create();
 	}
 	if(map==GameSetting::Map::SNOW){
 		return SnowMapLayer::create();

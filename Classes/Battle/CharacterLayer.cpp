@@ -5,6 +5,15 @@ bool CharacterLayer:: init()
 	//*enemy = new Character[3];
 	//enemyAI = new EnemyAI(enemy);
 
+	// ---------- WebSocket ---------
+	//_wsiClient = new cocos2d::network::WebSocket();
+	//_wsiClient->init(*this, "ws://211.87.229.116:8001");
+	// ---------- WebSocket ---------
+
+
+	ready = false;
+
+
 	//触屏事件监听
 	auto dispatcher = Director::getInstance()->getEventDispatcher();
 	auto listener = EventListenerTouchOneByOne::create();
@@ -28,6 +37,9 @@ bool CharacterLayer::onTouchBegan(Touch *pTouch, Event *pEvent){
 void CharacterLayer::onTouchEnded(Touch *touch, Event *unused_event){
 	posEnded = touch->getLocation();
 	Vec2 force=posEnded-posBegan;
+
+	//_wsiClient->send("1&"+std::to_string(force.x)+"&"+std::to_string(force.y));
+
 	hero->applyImpulse(force);
 }
 
@@ -89,3 +101,50 @@ void CharacterLayer::setEnemy(std::vector<GameSetting::Character> enemy)
 	}
 }
 
+
+
+// ------------------ websocket function -----------------------
+// 开始socket连接
+//void CharacterLayer::onOpen(cocos2d::network::WebSocket* ws)
+//{
+//    CCLOG("OnOpen");
+//	_wsiClient->send("game1");
+//}
+//
+//// 接收到了消息
+//void CharacterLayer::onMessage(cocos2d::network::WebSocket* ws, const cocos2d::network::WebSocket::Data& data)
+//{
+//    std::string textStr = data.bytes;
+//    CCLOG(textStr.c_str());
+//	int begin = textStr.find_first_of("&");
+//	int end = textStr.find_last_of("&");
+//	std::string num = textStr.substr(0, begin);
+//	std::string s1 = textStr.substr(begin+1, end-begin-1);
+//	float x = std::stod(s1);
+//	std::string s2 = textStr.substr(end+1, textStr.length()-end-2);
+//	float y = std::stod(s2);
+//
+//	hero->applyImpulse(Vec2(x,y));
+//}
+//
+//// 连接关闭
+//void CharacterLayer::onClose(cocos2d::network::WebSocket* ws)
+//{
+//    if (ws == _wsiClient)
+//    {
+//        _wsiClient = NULL;
+//    }
+//    CC_SAFE_DELETE(ws);
+//    CCLOG("onClose");
+//}
+//
+//// 遇到错误
+//void CharacterLayer::onError(cocos2d::network::WebSocket* ws, const cocos2d::network::WebSocket::ErrorCode& error)
+//{
+//    if (ws == _wsiClient)
+//    {
+//        char buf[100] = {0};
+//        sprintf(buf, "an error was fired, code: %d", error);
+//    }
+//    CCLOG("Error was fired, error code: %d", error);
+//}

@@ -1,5 +1,5 @@
 #include "cocos2d.h"
-#include "MapLayer.h"
+#include "ForestMapLayer.h"
 #include "SnowMapLayer.h"
 #include "CharacterLayer.h"
 #include "GameSetting.h"
