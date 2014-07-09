@@ -18,8 +18,6 @@ bool MapLayer:: init(){
         return false;
     }
 
-	ready = false;
-
 	return true;
 }
 
