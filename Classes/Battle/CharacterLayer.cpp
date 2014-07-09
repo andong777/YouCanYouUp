@@ -11,9 +11,6 @@ bool CharacterLayer:: init()
 	// ---------- WebSocket ---------
 
 
-	ready = false;
-
-
 	//触屏事件监听
 	auto dispatcher = Director::getInstance()->getEventDispatcher();
 	auto listener = EventListenerTouchOneByOne::create();
@@ -23,8 +20,12 @@ bool CharacterLayer:: init()
 	listener->setSwallowTouches(true);//不向下传递触摸
 	dispatcher->addEventListenerWithSceneGraphPriority(listener,this);
 
+
+	heroHealth = new Health();
+
+
 	//定时判断角色状态
-	this->schedule(schedule_selector(CharacterLayer::scheduleCallBack), 1.f);  
+	this->schedule(schedule_selector(CharacterLayer::scheduleCallBack), 0.2f);  
 
 	return true;
 }
@@ -46,6 +47,12 @@ void CharacterLayer::onTouchEnded(Touch *touch, Event *unused_event){
 void CharacterLayer::scheduleCallBack(float fDelta){
 	CheckResult();
 	enemyAI->action(hero);
+
+
+	hero->recovery(3);//每次恢复3hp
+
+	heroHealth->health = getHeroHealth();
+	NotificationCenter::sharedNotificationCenter()->postNotification("getHealth",heroHealth);
 }
 
 void CharacterLayer::CheckResult(){
@@ -78,7 +85,7 @@ void CharacterLayer::Rebirth(Character* cha,Point birthPoint){
 
 CharacterLayer::~CharacterLayer(){
 	delete hero;
-	
+	delete enemyAI;
 }
 
 void CharacterLayer::setHero(GameSetting::Character hero)
@@ -101,7 +108,15 @@ void CharacterLayer::setEnemy(std::vector<GameSetting::Character> enemy)
 	}
 }
 
+int CharacterLayer::getHeroHealth(){
+	return hero->getHealth();
+}
 
+void CharacterLayer::sendHealth(Object* obj){
+	/*
+	Health* health = (Health*)obj;
+	health->health = getHeroHealth();*/
+}
 
 // ------------------ websocket function -----------------------
 // 开始socket连接

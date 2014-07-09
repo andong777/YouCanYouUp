@@ -14,14 +14,13 @@ Scene* BattleScene::createScene(GameSetting::Map map, GameSetting::Character her
 	characterLayer->setEnemy(enemy);
 	//characterLayer->setCharacter(character);
 	//创建UI层
-	//auto uiLayer = UILayer::create();
+	auto uiLayer = HUDLayer::create();
 
 	//将层添加到场景中
 	scene->addChild(mapLayer);
 	scene->addChild(characterLayer);
+	scene->addChild(uiLayer);
 
-	//mapLayer->ready = true;
-	characterLayer->ready = true;
 
 	//设置物理世界刚体可见
 	scene->getPhysicsWorld()->setDebugDrawMask(true);

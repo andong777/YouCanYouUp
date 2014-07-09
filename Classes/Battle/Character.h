@@ -16,12 +16,12 @@ private:
 	//角色上次受力
 	//Vec2 lastForce;
 
-	//角色属性
-	//float mass;
-	int max_health;
-
 	// 这个人是谁？
 	GameSetting::Character who;
+	//角色属性
+	//float mass;
+	int maxHealth;
+
 
 public:
 	Character(GameSetting::Character character);
@@ -33,11 +33,19 @@ public:
 	PhysicsBody* getBody();
 	//给刚体叠加一个速度
 	void applyImpulse(Vec2 vec);
+
 	//返回角色位置
 	Vec2 getPosition();
-
 	//设置角色位置
 	void setPosition(Vec2 pos);
+
+	//消耗角色体力
+	bool useHealth(int v);
+	//回复角色体力
+	void recovery(int v);
+	//返回当前体力值
+	int getHealth();
+
 
 	void init();
 };

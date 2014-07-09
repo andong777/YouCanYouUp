@@ -1,9 +1,13 @@
-#pragma once
+//#pragma once
+#ifndef _CHARACTERLAYER_H_
+#define _CHARACTERLAYER_H_
+
 #include "cocos2d.h"
 #include "Character.h"
 #include "EnemyAI.h"
 #include <vector>
 #include "network/WebSocket.h"
+#include "Health.h"
 
 
 class CharacterLayer : public cocos2d::Layer/*, public cocos2d::network::WebSocket::Delegate*/
@@ -30,10 +34,12 @@ private:
 	//触屏终止事件
 	virtual void onTouchEnded(Touch *touch, Event *unused_event);
 
-public:
-	//是否已经被scene添加
-	bool ready;
+	Health* heroHealth;
+	void sendHealth(Object* obj);
+	int getHeroHealth();
 
+public:
+	
 	virtual bool init();  
 	~CharacterLayer();
 	CREATE_FUNC(CharacterLayer);
@@ -52,3 +58,4 @@ public:
 	//cocos2d::network::WebSocket* _wsiClient;
 };
 
+#endif
