@@ -21,7 +21,9 @@ bool LoginScene::init()
 	return_->addTouchEventListener(CC_CALLBACK_2(LoginScene::returnEvent, this));
 	Button *signup = (Button*)(ui::Helper::seekWidgetByName(pNode, "register"));
 	signup->addTouchEventListener(CC_CALLBACK_2(LoginScene::signupEvent, this));
-
+	
+	Button *login = (Button*)(ui::Helper::seekWidgetByName(pNode, "login"));
+	login->addTouchEventListener(CC_CALLBACK_2(LoginScene::loginEvent, this));
 	// 找到两个输入框
 	username = (TextField*)(ui::Helper::seekWidgetByName(pNode, "username"));
 	password = (TextField*)(ui::Helper::seekWidgetByName(pNode, "code"));

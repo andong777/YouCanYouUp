@@ -21,6 +21,12 @@ bool SignupScene::init()
 	return_->addTouchEventListener(CC_CALLBACK_2(SignupScene::returnEvent, this));
 	Button *login = (Button*)(ui::Helper::seekWidgetByName(pNode, "login"));
 	login->addTouchEventListener(CC_CALLBACK_2(SignupScene::loginEvent, this));
+	
+	Button *signup = (Button*)(ui::Helper::seekWidgetByName(pNode, "register"));
+	signup->addTouchEventListener(CC_CALLBACK_2(SignupScene::signupEvent, this));
+	// 找到两个输入框
+	username = (TextField*)(ui::Helper::seekWidgetByName(pNode, "username"));
+	password = (TextField*)(ui::Helper::seekWidgetByName(pNode, "code"));
 	return true;
 }
 
@@ -42,4 +48,46 @@ void SignupScene::loginEvent(Ref *pSender, Widget::TouchEventType type)
 		Director::getInstance()->pushScene(transition);
 		break;
 	}	
+}
+
+void SignupScene::signupEvent(Ref *pSender, Widget::TouchEventType type)
+{
+	switch(type){
+	case Widget::TouchEventType::ENDED:
+		std::string username_s = username->getStringValue();
+		std::string password_s = password->getStringValue();
+		CCLOG("GET-Signup");
+		HttpRequest* request = new HttpRequest();  
+		std::string url = "http://whydemo.sinaapp.com/whyuser/sign_up/"+username_s+"/"+password_s;
+		request->setUrl(url.c_str());  
+		request->setRequestType(HttpRequest::Type::GET);  
+		request->setResponseCallback(this, httpresponse_selector(LoginScene::onHttpRequestCompleted));    
+		request->setTag("GET-Signup");  
+		HttpClient::getInstance()->send(request);  
+		request->release();
+		break;
+	}
+}
+
+void LoginScene::onHttpRequestCompleted(HttpClient *sender, HttpResponse *response) 
+{
+	if(!response || !response->isSucceed())
+		return;
+
+    std::vector<char>* buffer = response->getResponseData();  
+    char res = (*buffer)[0];
+	// 注册成功
+	if(res == '1')
+	{
+		// 转到登录界面
+		Scene *login = LoginScene::create(); 
+		TransitionScene *transition = TransitionFade::create(0.5, login);
+		Director::getInstance()->pushScene(transition);
+	}
+	// 注册失败。清空两个输入框
+	else
+	{
+		username->setText("");
+		password->setText("");
+	}
 }
