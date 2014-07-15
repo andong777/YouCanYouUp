@@ -26,10 +26,13 @@ Scene* BattleScene::createScene(bool online, GameSetting::Character hero, GameSe
 	{
 		((MPCharacterLayer*)characterLayer)->initBattleScene(initNum);
 	}
+	
+	auto uiLayer = HUDLayer::create();
 
 	//将层添加到场景中
 	scene->addChild(mapLayer);
 	scene->addChild(characterLayer);
+	scene->addChild(uiLayer);
 
 	//设置物理世界刚体可见
 	scene->getPhysicsWorld()->setDebugDrawMask(true);

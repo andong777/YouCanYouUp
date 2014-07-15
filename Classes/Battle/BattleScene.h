@@ -1,9 +1,12 @@
+#pragma once
+
 #include "cocos2d.h"
 #include "ForestMapLayer.h"
 #include "SnowMapLayer.h"
 #include "MPCharacterLayer.h"
 #include "SPCharacterLayer.h"
 #include "GameSetting.h"
+#include "HUDLayer.h"
 
 class BattleScene : public cocos2d::Scene
 {

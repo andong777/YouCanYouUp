@@ -19,6 +19,7 @@ Character::Character(GameSetting::Character character)
 	
 	init();
 	
+
 }
 //没有图片的构造函数
 Character::Character(){
@@ -32,11 +33,12 @@ Character::Character(){
 void Character::init()
 {
 	//设置最大体力，初始体力与最大体力相同
-	max_health = CharacterParameter::getMaxHealth(who);
-	health = max_health;
+	maxHealth = CharacterParameter::getMaxHealth(who);
+	health = maxHealth;
 	//设置重力
 	body->setMass(CharacterParameter::getMass(who));
 }
+
 
 Sprite* Character::getSprite(){
 	return sprite;
@@ -58,19 +60,33 @@ void Character::applyImpulse(Vec2 vec){
 	//vec.x*=200;
 	//vec.y*=200;
 	vec*= body->getMass()/2;
-	body->applyImpulse(vec);
+	if(useHealth(10)) body->applyImpulse(vec);
 }
 
 Vec2 Character::getPosition(){
 	return body->getPosition();
-	//return this->getSprite()->getPhysicsBody()->getPosition();
 }
 
 void Character::setPosition(Vec2 pos){
+	//auto parent =sprite->getParent();
 	sprite->setPosition(pos);
 }
 
+bool Character::useHealth(int v){
+	if(v<=health){
+		health-= v;
+		return true;
+	}else return false;
+}
 
+void Character::recovery(int v){
+	health+=v;
+	if(health>maxHealth) health= maxHealth;
+}
+
+int Character::getHealth(){
+	return health;
+}
 /*
 Vec2 Character::getLastForce(){
 	return this->lastForce;

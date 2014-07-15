@@ -1,6 +1,9 @@
-#pragma once
+#ifndef _CHARACTERLAYER_H_
+#define _CHARACTERLAYER_H_
+
 #include "cocos2d.h"
 #include "Character.h"
+#include "Health.h"
 
 class CharacterLayer : public cocos2d::Layer
 {
@@ -23,6 +26,14 @@ protected:
 	//触屏终止事件
 	virtual void onTouchEnded(Touch *touch, Event *unused_event) = 0;
 
+	Health* heroHealth;
+	void sendHealth(Object* obj){
+	/*
+	Health* health = (Health*)obj;
+	health->health = getHeroHealth();*/
+};
+	int getHeroHealth(){return hero->getHealth();};
+
 public:
 
 	//schedule调用函数
@@ -33,3 +44,4 @@ public:
 
 };
 
+#endif

@@ -9,6 +9,9 @@ publish/
 .cocos-project.json
 CMakeLists.txt
 
+# Ignored backup files
+*.bak
+
 # Compiled Object files
 *.slo
 *.lo
