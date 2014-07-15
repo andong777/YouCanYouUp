@@ -10,11 +10,14 @@
   "designHeight": 640,
   "designWidth": 960,
   "textures": [
-    "OnlineUI10.plist"
+    "OnlineUI10.plist",
+    "OnlineUI11.plist"
   ],
   "texturesPng": [
     "OnlineUI10.png",
-    "OnlineUI10.png"
+    "OnlineUI11.png",
+    "OnlineUI10.png",
+    "OnlineUI11.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

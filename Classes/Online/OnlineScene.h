@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "CocosGUI.h" 
+#include "2d/CCLabel.h"
 
 class OnlineScene : public cocos2d::Scene
 {
@@ -16,6 +17,11 @@ public:
 	void recordEvent(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void offlineEvent(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void returnEvent(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+private:
+	// 显示用户名的文本框
+	cocos2d::Label *text;
+
 };
 
 #endif // __ONLINE_SCENE_H__

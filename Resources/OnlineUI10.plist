@@ -72,9 +72,9 @@
 				<key>originalHeight</key>
 				<integer>69</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>460</integer>
 				<key>y</key>
-				<integer>253</integer>
+				<integer>0</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -91,9 +91,9 @@
 				<key>originalHeight</key>
 				<integer>69</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>672</integer>
 				<key>y</key>
-				<integer>324</integer>
+				<integer>0</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -112,7 +112,7 @@
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
-				<integer>395</integer>
+				<integer>253</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -129,9 +129,9 @@
 				<key>originalHeight</key>
 				<integer>143</integer>
 				<key>x</key>
-				<integer>318</integer>
+				<integer>212</integer>
 				<key>y</key>
-				<integer>73</integer>
+				<integer>253</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -148,9 +148,9 @@
 				<key>originalHeight</key>
 				<integer>51</integer>
 				<key>x</key>
-				<integer>212</integer>
+				<integer>0</integer>
 				<key>y</key>
-				<integer>253</integer>
+				<integer>398</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -167,9 +167,9 @@
 				<key>originalHeight</key>
 				<integer>47</integer>
 				<key>x</key>
-				<integer>460</integer>
-				<key>y</key>
 				<integer>0</integer>
+				<key>y</key>
+				<integer>451</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -186,28 +186,9 @@
 				<key>originalHeight</key>
 				<integer>51</integer>
 				<key>x</key>
-				<integer>212</integer>
+				<integer>491</integer>
 				<key>y</key>
-				<integer>306</integer>
-				<key>offsetX</key>
-				<real>0</real>
-				<key>offsetY</key>
-				<real>0</real>
-			</dict>
-			<key>Bg.png</key>
-			<dict>
-				<key>width</key>
-				<integer>960</integer>
-				<key>height</key>
-				<integer>640</integer>
-				<key>originalWidth</key>
-				<integer>960</integer>
-				<key>originalHeight</key>
-				<integer>640</integer>
-				<key>x</key>
-				<integer>212</integer>
-				<key>y</key>
-				<integer>359</integer>
+				<integer>451</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -226,7 +207,7 @@
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
-				<integer>466</integer>
+				<integer>504</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -237,7 +218,7 @@
 				<key>width</key>
 				<integer>69</integer>
 				<key>height</key>
-				<integer>71</integer>
+				<integer>72</integer>
 				<key>originalWidth</key>
 				<integer>69</integer>
 				<key>originalHeight</key>
@@ -245,11 +226,11 @@
 				<key>x</key>
 				<integer>71</integer>
 				<key>y</key>
-				<integer>466</integer>
+				<integer>504</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
-				<real>0.5</real>
+				<real>0</real>
 			</dict>
 			<key>Help-btn.png</key>
 			<dict>
@@ -262,9 +243,9 @@
 				<key>originalHeight</key>
 				<integer>71</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>142</integer>
 				<key>y</key>
-				<integer>539</integer>
+				<integer>504</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -281,9 +262,9 @@
 				<key>originalHeight</key>
 				<integer>71</integer>
 				<key>x</key>
-				<integer>481</integer>
+				<integer>213</integer>
 				<key>y</key>
-				<integer>49</integer>
+				<integer>504</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -300,9 +281,9 @@
 				<key>originalHeight</key>
 				<integer>71</integer>
 				<key>x</key>
-				<integer>552</integer>
+				<integer>284</integer>
 				<key>y</key>
-				<integer>49</integer>
+				<integer>504</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -318,14 +299,14 @@
 			<key>realTextureFileName</key>
 			<string>OnlineUI10.png</string>
 			<key>size</key>
-			<string>{4096,4096}</string>
+			<string>{1024,1024}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
-			<integer>4096</integer>
+			<integer>1024</integer>
 			<key>height</key>
-			<integer>4096</integer>
+			<integer>1024</integer>
 		</dict>
 	</dict>
 </plist>

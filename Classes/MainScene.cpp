@@ -1,6 +1,6 @@
 #include "MainScene.h"
 #include "CCSGUIReader.h"
-#include "Online\OnlineScene.h"
+#include "Online\LoginScene.h"
 #include "HelpScene.h"
 #include "Local\CharacterSelectScene.h"
 
@@ -14,31 +14,6 @@ bool MainScene::init()
     {
         return false;
     }
-
-	std::string textStr("1&203&712.43");
-	int begin = textStr.find_first_of("&");
-	int end = textStr.find_last_of("&");
-	CCLOG("%d, %d", begin, end);
-	//std::string num = textStr.substr(0, begin);
-	std::string s1 = textStr.substr(begin+1, end-begin-1);
-	float x = std::stod(s1);
-	std::string s2 = textStr.substr(end+1, textStr.length()-end-2);
-	float y = std::stod(s2);
-	//CCLOG("%s:(%d,%d)", num, x, y);
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	
-	//Node* pNode = SceneReader::getInstance()->createNodeWithSceneFile("home/home.ExportJson");
-	//this->addChild(pNode);
-	// 获取精灵并执行操作
-	/*ComRender *render = (ComRender*)(pNode->getChildByTag(10008)->getComponent("CCArmature"));
-	Sprite *object = (Sprite*)(render->getNode());
-	object->runAction(MoveBy::create(5, Vec2(-1000, 0)));*/
-	// 获取UI组件并绑定事件监听
-	/*ComRender *render2 = (ComRender*)(pNode->getChildByTag(10010)->getComponent("GUIComponent"));
-	Widget *widget = (Widget*)(render2->getNode());
-	widget->addTouchEventListener(CC_CALLBACK_2(MainScene::touchEvent, this));*/
 
 	Widget *pNode = (Widget*)(GUIReader::getInstance()->widgetFromJsonFile("home.ExportJson"));
 	this->addChild(pNode);
@@ -67,8 +42,8 @@ void MainScene::onlineEvent(Ref *pSender, Widget::TouchEventType type)
 {
 	switch(type){
 	case Widget::TouchEventType::ENDED:
-		Scene *online = OnlineScene::create();
-		TransitionScene *transition = TransitionFade::create(0.5, online);
+		Scene *login = LoginScene::create();
+		TransitionScene *transition = TransitionFade::create(0.5, login);
 		Director::getInstance()->pushScene(transition);
 		break;
 	}

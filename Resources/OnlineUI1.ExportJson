@@ -10,10 +10,12 @@
   "designHeight": 640,
   "designWidth": 960,
   "textures": [
-    "OnlineUI10.plist"
+    "OnlineUI10.plist",
+    "OnlineUI11.plist"
   ],
   "texturesPng": [
-    "OnlineUI10.png"
+    "OnlineUI10.png",
+    "OnlineUI11.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -47,7 +49,7 @@
               "ignoreSize": true,
               "layoutParameter": null,
               "opacity": 255,
-              "positionPercentX": -0.395569623,
+              "positionPercentX": -0.398734182,
               "positionPercentY": 0.382470131,
               "positionType": 0,
               "rotation": -0.00337002,
@@ -61,7 +63,7 @@
               "useMergedTexture": true,
               "visible": true,
               "width": 69,
-              "x": -125,
+              "x": -126,
               "y": 96,
               "capInsetsHeight": 1,
               "capInsetsWidth": 1,

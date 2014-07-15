@@ -4,6 +4,7 @@
 #include "RecordScene.h"
 #include "LoginScene.h"
 #include "LoadingScene.h"
+#include "base/CCUserDefault.h"
 
 USING_NS_CC;
 using namespace cocostudio;
@@ -25,6 +26,12 @@ bool OnlineScene::init()
 	offline->addTouchEventListener(CC_CALLBACK_2(OnlineScene::offlineEvent, this));
 	Button *return_ = (Button*)(ui::Helper::seekWidgetByName(pNode, "return"));
 	return_->addTouchEventListener(CC_CALLBACK_2(OnlineScene::returnEvent, this));
+
+	// 找到显示用户名的文本框
+	text = (Label*)(ui::Helper::seekWidgetByName(pNode, "playername"));
+	std::string username = UserDefault::getInstance()->getStringForKey("username");
+	text->setString(username);
+
 	return true;
 }
 
