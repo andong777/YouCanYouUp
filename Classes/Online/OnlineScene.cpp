@@ -3,6 +3,7 @@
 #include "Battle\BattleScene.h"
 #include "RecordScene.h"
 #include "LoginScene.h"
+#include "LoadingScene.h"
 
 USING_NS_CC;
 using namespace cocostudio;
@@ -13,9 +14,6 @@ bool OnlineScene::init()
 	if(!Scene::init()){
 		return false;
 	}
-
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	Widget *pNode = (Widget*)(GUIReader::getInstance()->widgetFromJsonFile("OnlineUI1.ExportJson"));
 	this->addChild(pNode);
@@ -34,12 +32,8 @@ void OnlineScene::pvpEvent(Ref *pSender, Widget::TouchEventType type)
 {
 	switch(type){
 	case Widget::TouchEventType::ENDED:
-		/*Scene *matching = MatchingScene::create();
-		Director::getInstance()->replaceScene(MatchingScene);*/
-		// Æ¥Åä¹¤×÷
-		Scene *game = BattleScene::create();
-		TransitionScene *transition = TransitionFade::create(0.5, game);
-		Director::getInstance()->replaceScene(transition);
+		Scene *loading = LoadingScene::create();
+		Director::getInstance()->replaceScene(loading);
 		break;
 	}	
 }

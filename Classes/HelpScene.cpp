@@ -1,6 +1,5 @@
 #include "HelpScene.h"
 #include "CocosGUI.h"  
-#include "CCArmature.h"
 #include "CCSGUIReader.h"
 
 USING_NS_CC;
@@ -12,16 +11,6 @@ bool HelpScene::init()
 	if(!Scene::init()){
 		return false;
 	}
-
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-	/*CCArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Animation0.png","Animation0.plist","Animation.ExportJson");
-	CCArmature *armature = CCArmature::create("Animation");
-	armature->getAnimation()->playByIndex(0);
-	armature->setScale(0.5f);
-	armature->setPosition(ccp(visibleSize.width * 0.5, visibleSize.height * 0.5));
-	this->addChild(armature);*/
 
 	Widget *pNode = (Widget*)(GUIReader::getInstance()->widgetFromJsonFile("help.ExportJson"));
 	this->addChild(pNode);

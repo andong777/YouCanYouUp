@@ -2,26 +2,34 @@
 
 USING_NS_CC;
 
-Scene* BattleScene::createScene(GameSetting::Map map, GameSetting::Character hero, std::vector<GameSetting::Character> enemy){
-	//创建场景
+Scene* BattleScene::createScene(bool online, GameSetting::Character hero, GameSetting::Map map, GameSetting::Character enemy, int initNum, std::string &enemyKey){
+	//创建场景 
 	auto scene = Scene::createWithPhysics();
 	//创建场景层
-	//auto mapLayer = MapLayer::create();
 	auto mapLayer = BattleScene::selectMap(map);
 	//创建角色层
-	auto characterLayer = CharacterLayer::create();
+	CharacterLayer *characterLayer;
+	if(online)
+	{
+		characterLayer = MPCharacterLayer::create();
+		((MPCharacterLayer*)characterLayer)->enemyKey = enemyKey;
+	}
+	else
+	{
+		characterLayer = SPCharacterLayer::create();
+	}
+		
 	characterLayer->setHero(hero);
 	characterLayer->setEnemy(enemy);
-	//characterLayer->setCharacter(character);
-	//创建UI层
-	//auto uiLayer = UILayer::create();
+
+	if(online)
+	{
+		((MPCharacterLayer*)characterLayer)->initBattleScene(initNum);
+	}
 
 	//将层添加到场景中
 	scene->addChild(mapLayer);
 	scene->addChild(characterLayer);
-
-	//mapLayer->ready = true;
-	characterLayer->ready = true;
 
 	//设置物理世界刚体可见
 	scene->getPhysicsWorld()->setDebugDrawMask(true);
@@ -33,7 +41,6 @@ Scene* BattleScene::createScene(GameSetting::Map map, GameSetting::Character her
 }
 
 bool BattleScene::init(){
-
 	return true;
 }
 

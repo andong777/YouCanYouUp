@@ -44,7 +44,14 @@ void CharacterSelectScene::selectEvent(Ref *pSender, Widget::TouchEventType type
 		{
 			charSelected = GameSetting::Character::CHARACTER1;
 		}
-
+		std::vector<GameSetting::Character> enemy;
+		enemy.push_back(GameSetting::Character::CHARACTER1);
+		enemy.push_back(GameSetting::Character::CHARACTER2);
+		auto map = MapSelectScene::create();
+		map->setCharSelected(charSelected);
+		TransitionScene *transition = TransitionFade::create(0.5, map);
+		Director::getInstance()->replaceScene(transition);
+		break;
 	}
 }
 
