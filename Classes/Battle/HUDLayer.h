@@ -22,14 +22,14 @@ protected:
 	virtual bool init();  
 
 public:
-	/*
-	MapLayer(void);
-	~MapLayer(void);
-	*/
+
+	~HUDLayer(void){
+		delete heroHealth;
+		NotificationCenter::sharedNotificationCenter()->removeAllObservers(this);
+	}
+	
 	CREATE_FUNC(HUDLayer);
-
-	//void movePlate(float fDelta);
-
+	
 
 };
 
