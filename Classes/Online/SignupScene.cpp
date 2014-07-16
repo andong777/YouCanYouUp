@@ -1,6 +1,7 @@
 #include "SignupScene.h"
 #include "LoginScene.h"
 #include "CCSGUIReader.h"
+#include "Global.h"
 
 USING_NS_CC;
 using namespace cocostudio;
@@ -59,7 +60,7 @@ void SignupScene::signupEvent(Ref *pSender, Widget::TouchEventType type)
 		std::string password_s = password->getStringValue();
 		CCLOG("GET-Signup");
 		HttpRequest* request = new HttpRequest();  
-		std::string url = "http://whydemo.sinaapp.com/whyuser/sign_up/"+username_s+"/"+password_s;
+		std::string url = SIGNUP_SERVER_URL + username_s + "/" + password_s;
 		request->setUrl(url.c_str());  
 		request->setRequestType(HttpRequest::Type::GET);  
 		request->setResponseCallback(this, httpresponse_selector(SignupScene::onHttpRequestCompleted));    

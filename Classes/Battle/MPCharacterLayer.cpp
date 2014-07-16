@@ -1,13 +1,16 @@
 #include "MPCharacterLayer.h"
 #include "CmdTool.h"
+#include "Global.h"
+#include "ResultLayer.h"
 
 bool MPCharacterLayer:: init()
 {
-	int hero_lives = 3;
+	int hero_lives = INITIAL_LIVES;
+	int enemy_lives = INITIAL_LIVES;
 
 	// ---------- WebSocket ---------
 	_wsiClient = new cocos2d::network::WebSocket();
-	_wsiClient->init(*this, "ws://202.194.14.196:8001");
+	_wsiClient->init(*this, WS_SERVER_URL);
 	// ---------- WebSocket ---------
 
 	//´¥ÆÁÊÂ¼þ¼àÌý
@@ -49,12 +52,25 @@ void MPCharacterLayer::onTouchEnded(Touch *touch, Event *unused_event){
 void MPCharacterLayer::CheckResult(){
 	float heroY = hero->getSprite()->getPositionY();
 	if(heroY<0){
-		CCLOG("you lose");
-		Rebirth(hero);
+		if(--hero_lives){
+			Rebirth(hero);
+		}
+		else{
+			CCLOG("You lose!");
+			this->getScene()->addChild(ResultLayer::create(Result::LOSE));
+			Director::getInstance()->getRunningScene()->getPhysicsWorld()->setSpeed(0);
+		}
 	}
 	float enemyY = enemy->getSprite()->getPositionY();
 	if(enemy<0){
-		CCLOG("you win");
+		if(--enemy_lives){
+				Rebirth(enemy);
+			}
+			else{
+				CCLOG("You win!");
+				this->getScene()->addChild(ResultLayer::create(Result::WIN));
+				Director::getInstance()->getRunningScene()->getPhysicsWorld()->setSpeed(0);
+			}
 	}
 }
 

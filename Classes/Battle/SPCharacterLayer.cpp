@@ -1,4 +1,6 @@
 #include "SPCharacterLayer.h"
+#include "Global.h"
+#include "ResultLayer.h"
 
 bool SPCharacterLayer:: init()
 {
@@ -6,7 +8,8 @@ bool SPCharacterLayer:: init()
 
 	enemyManager=new EnemyManager();
 
-	hero_lives = 3;
+	hero_lives = INITIAL_LIVES;
+	enemy_lives = INITIAL_LIVES;
 
 	//´¥ÆÁÊÂ¼þ¼àÌý
 	auto dispatcher = Director::getInstance()->getEventDispatcher();
@@ -51,15 +54,21 @@ bool SPCharacterLayer::onTouchBegan(Touch *pTouch, Event *pEvent){
 
 void SPCharacterLayer::onTouchEnded(Touch *touch, Event *unused_event){
 	posEnded = touch->getLocation();
-	Vec2 force=posEnded-posBegan;
+	Vec2 force=2*(posEnded-posBegan);
 	hero->applyImpulse(force);
 }
 
 void SPCharacterLayer::CheckResult(){
 	float heroY = hero->getSprite()->getPositionY();
 	if(heroY<0){
-		CCLOG("you lose");
-		Rebirth(hero);
+		if(--hero_lives){
+			Rebirth(hero);
+		}
+		else{
+			CCLOG("You lose!");
+			this->getScene()->addChild(ResultLayer::create(Result::LOSE));
+			Director::getInstance()->getRunningScene()->getPhysicsWorld()->setSpeed(0);
+		}
 	}
 	std::vector<Character*> & enemys=enemyManager->getEnemys();
 	int len=enemys.size();
@@ -69,8 +78,15 @@ void SPCharacterLayer::CheckResult(){
 		float enemyY = e->getSprite()->getPositionY();
 		if(enemyY<0)
 		{
-			//CCLOG("you win");
-			Rebirth(e);
+			if(--enemy_lives){
+				Rebirth(e);
+			}
+			else{
+				CCLOG("You win!");
+				this->getScene()->addChild(ResultLayer::create(Result::WIN));
+				Director::getInstance()->getRunningScene()->getPhysicsWorld()->setSpeed(0);
+			}
+			
 		}
 	}
 }

@@ -61,7 +61,6 @@ void Character::applyImpulse(Vec2 vec){
 	//vec.y*=200;
 	vec*= body->getMass()/2;
 	int temHealth=vec.length()/2000;
-	CCLOG("%d",temHealth);
 	if(useHealth(10)) 
 		body->applyImpulse(vec);
 }

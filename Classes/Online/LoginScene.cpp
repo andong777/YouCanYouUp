@@ -3,6 +3,7 @@
 #include "SignupScene.h"
 #include "OnlineScene.h"
 #include "base/CCUserDefault.h"
+#include "Global.h"
 
 USING_NS_CC;
 using namespace cocostudio;
@@ -60,7 +61,7 @@ void LoginScene::loginEvent(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		std::string password_s = "123";*/
 		CCLOG("GET-Login");
 		HttpRequest* request = new HttpRequest();  
-		std::string url = "http://whydemo.sinaapp.com/whyuser/sign_in/"+username_s+"/"+password_s;
+		std::string url = LOGIN_SERVER_URL + username_s + "/" + password_s;
 		request->setUrl(url.c_str());  
 		request->setRequestType(HttpRequest::Type::GET);  
 		request->setResponseCallback(this, httpresponse_selector(LoginScene::onHttpRequestCompleted));    

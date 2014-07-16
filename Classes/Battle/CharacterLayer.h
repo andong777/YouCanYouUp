@@ -18,6 +18,7 @@ protected:
 	Character* hero;
 
 	int hero_lives;
+	int enemy_lives;
 
 	//≈–∂œ §∏∫
 	virtual void CheckResult() = 0;
