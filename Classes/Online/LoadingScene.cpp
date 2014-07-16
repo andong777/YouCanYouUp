@@ -56,7 +56,11 @@ void LoadingScene::onMessage(cocos2d::network::WebSocket* ws, const cocos2d::net
     }
 	std::vector<GameSetting::Character> enemy;
 	enemy.push_back(GameSetting::Character::CHARACTER2);
+<<<<<<< HEAD
     Scene *game = BattleScene::createScene(true, GameSetting::Character::CHARACTER1, GameSetting::Map::DESERT, enemy, initNum, enemyKey);
+=======
+    Scene *game = BattleScene::createScene(true, GameSetting::Character::CHARACTER1, GameSetting::Map::FOREST, enemy, initNum, enemyKey);
+>>>>>>> origin/master
 	TransitionScene *transition = TransitionFade::create(0.5, game);
 	Director::getInstance()->replaceScene(transition);
 }

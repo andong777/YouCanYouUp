@@ -55,6 +55,10 @@ bool SPCharacterLayer::onTouchBegan(Touch *pTouch, Event *pEvent){
 void SPCharacterLayer::onTouchEnded(Touch *touch, Event *unused_event){
 	posEnded = touch->getLocation();
 	Vec2 force=2*(posEnded-posBegan);
+<<<<<<< HEAD
+=======
+	CCLOG("%f, %f", hero->getPosition().x, hero->getPosition().y);
+>>>>>>> origin/master
 	hero->applyImpulse(force);
 }
 

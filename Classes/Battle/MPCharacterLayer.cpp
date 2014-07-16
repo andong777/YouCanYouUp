@@ -45,6 +45,7 @@ void MPCharacterLayer::onTouchEnded(Touch *touch, Event *unused_event){
 	posEnded = touch->getLocation();
 	Vec2 force=2*(posEnded-posBegan);
 
+	CCLOG("%f, %f", hero->getPosition().x, hero->getPosition().y);
 	_wsiClient->send("fight!key="+enemyKey+"&px="+std::to_string(hero->getPosition().x)+"&py="+
 		std::to_string(hero->getPosition().y)+"&fx="+std::to_string(force.x)+"&fy="+std::to_string(force.y));
 
