@@ -2,7 +2,7 @@
 
 USING_NS_CC;
 
-Scene* BattleScene::createScene(bool online, GameSetting::Character hero, GameSetting::Map map, GameSetting::Character enemy, int initNum, std::string &enemyKey){
+Scene* BattleScene::createScene(bool online, GameSetting::Character hero, GameSetting::Map map, std::vector<GameSetting::Character> enemy, int initNum, std::string &enemyKey){
 	//创建场景 
 	auto scene = Scene::createWithPhysics();
 	//创建场景层

@@ -60,7 +60,10 @@ void Character::applyImpulse(Vec2 vec){
 	//vec.x*=200;
 	//vec.y*=200;
 	vec*= body->getMass()/2;
-	if(useHealth(10)) body->applyImpulse(vec);
+	int temHealth=vec.length()/2000;
+	CCLOG("%d",temHealth);
+	if(useHealth(10)) 
+		body->applyImpulse(vec);
 }
 
 Vec2 Character::getPosition(){

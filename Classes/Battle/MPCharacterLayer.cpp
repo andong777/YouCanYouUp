@@ -3,6 +3,8 @@
 
 bool MPCharacterLayer:: init()
 {
+	int hero_lives = 3;
+
 	// ---------- WebSocket ---------
 	_wsiClient = new cocos2d::network::WebSocket();
 	_wsiClient->init(*this, "ws://202.194.14.196:8001");
@@ -59,7 +61,6 @@ void MPCharacterLayer::Rebirth(Character* cha){
 
 MPCharacterLayer::~MPCharacterLayer(){
 	delete hero;
-	delete enemy;
 	
 }
 
@@ -71,9 +72,9 @@ void MPCharacterLayer::setHero(GameSetting::Character hero)
 	this->addChild(this->hero->getSprite());
 }
 
-void MPCharacterLayer::setEnemy(GameSetting::Character enemy)
+void MPCharacterLayer::setEnemy(std::vector<GameSetting::Character> enemy)
 {
-	this->enemy = new Character(enemy);
+	this->enemy = new Character(enemy[0]);
 	this->hero->setPosition(Vec2(500,500));
 	this->addChild(this->enemy->getSprite());
 }

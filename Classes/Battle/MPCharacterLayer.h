@@ -6,7 +6,7 @@
 class MPCharacterLayer : public CharacterLayer, public cocos2d::network::WebSocket::Delegate
 {
 private:
-
+	Character *enemy;
 	//判断胜负
 	void CheckResult();
 	//角色重生
@@ -24,7 +24,7 @@ public:
 	CREATE_FUNC(MPCharacterLayer);
 
 	void setHero(GameSetting::Character hero);
-	void setEnemy(GameSetting::Character enemy);
+	void setEnemy(std::vector<GameSetting::Character> enemy);
 
 	// for virtual function in websocket delegate
 	virtual void onOpen(cocos2d::network::WebSocket* ws);

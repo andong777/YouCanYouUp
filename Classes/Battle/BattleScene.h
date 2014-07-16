@@ -7,6 +7,7 @@
 #include "SPCharacterLayer.h"
 #include "GameSetting.h"
 #include "HUDLayer.h"
+#include <vector>
 
 class BattleScene : public cocos2d::Scene
 {
@@ -19,6 +20,6 @@ private:
 
 public:
 	//´´½¨³¡¾°
-	static Scene* createScene(bool online, GameSetting::Character hero, GameSetting::Map map, GameSetting::Character enemy, int initNum, std::string &enemyKey);
+	static Scene* createScene(bool online, GameSetting::Character hero, GameSetting::Map map, std::vector<GameSetting::Character> enemy, int initNum, std::string &enemyKey);
 };
 

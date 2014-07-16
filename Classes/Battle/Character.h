@@ -46,6 +46,7 @@ public:
 	//返回当前体力值
 	int getHealth();
 
+	int getMaxHealth(){return maxHealth;}
 
 	void init();
 };
