@@ -65,7 +65,24 @@ bool SnowMapLayer:: init(){
 	edgeDownNode->setTag(1);
 	//edgeDownBody->getShape(0)->setFriction(300);  //设置摩擦力
 
+	//
+	addBody(edgeDownBody);
+	addShape(ShapeType::CIRCLE);
 
+
+
+	//平台
+	PhysicsBody* plate;
+	Node* plateNode;
+	plate = PhysicsBody::createBox(Size(visibleSize.width/2,visibleSize.height/6),PHYSICSBODY_MATERIAL_DEFAULT );
+	plate->setDynamic(false);
+	plateNode = Node::create();
+	plateNode->setPhysicsBody(plate);
+	this->addChild(plateNode);
+	plateNode->setPosition(Vec2(visibleSize.width/2,visibleSize.height*2/3));
+
+	addBody(plate);
+	addShape(ShapeType::BOX);
 	/*
 	//平台
 	PhysicsBody* plates[4];

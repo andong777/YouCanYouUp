@@ -12,18 +12,16 @@ bool CharacterSelectScene::init()
 		return false;
 	}
 
-	Widget *pNode = (Widget*)(GUIReader::getInstance()->widgetFromJsonFile("CharacterselectUI.ExportJson"));
+	Widget *pNode = (Widget*)(GUIReader::getInstance()->widgetFromJsonFile("characterselect.ExportJson"));
 	this->addChild(pNode);
 
-	returnBtn = (Button*)(ui::Helper::seekWidgetByName(pNode, "return"));
-	nextBtn = (Button*)(ui::Helper::seekWidgetByName(pNode, "mapselect"));
-	cha1Btn = ui::Helper::seekWidgetByName(pNode, "CheckBox1");
-	cha2Btn = ui::Helper::seekWidgetByName(pNode, "CheckBox2");
+	returnBtn = (Button*)(ui::Helper::seekWidgetByName(pNode, "Button_16"));
+	cha1Btn = ui::Helper::seekWidgetByName(pNode, "Button_14");
+	cha2Btn = ui::Helper::seekWidgetByName(pNode, "Button_15");
 
 	cha1Btn->addTouchEventListener(CC_CALLBACK_2(CharacterSelectScene::selectEvent, this));
 	cha2Btn->addTouchEventListener(CC_CALLBACK_2(CharacterSelectScene::selectEvent, this));
 	returnBtn->addTouchEventListener(CC_CALLBACK_2(CharacterSelectScene::returnEvent, this));
-	nextBtn->addTouchEventListener(CC_CALLBACK_2(CharacterSelectScene::nextEvent, this));
 	return true;
 }
 
@@ -44,9 +42,6 @@ void CharacterSelectScene::selectEvent(Ref *pSender, Widget::TouchEventType type
 		{
 			charSelected = GameSetting::Character::CHARACTER1;
 		}
-		std::vector<GameSetting::Character> enemy;
-		enemy.push_back(GameSetting::Character::CHARACTER1);
-		enemy.push_back(GameSetting::Character::CHARACTER2);
 		auto map = MapSelectScene::create();
 		map->setCharSelected(charSelected);
 		TransitionScene *transition = TransitionFade::create(0.5, map);
@@ -62,15 +57,4 @@ void CharacterSelectScene::returnEvent(Ref *pSender, Widget::TouchEventType type
 		Director::getInstance()->popScene();
 		break;
 	}	
-}
-
-void CharacterSelectScene::nextEvent(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
-{
-	std::vector<GameSetting::Character> enemy;
-	enemy.push_back(GameSetting::Character::CHARACTER1);
-	enemy.push_back(GameSetting::Character::CHARACTER2);
-	auto map = MapSelectScene::create();
-	map->setCharSelected(charSelected);
-	TransitionScene *transition = TransitionFade::create(0.5, map);
-	Director::getInstance()->replaceScene(transition);
 }

@@ -33,23 +33,27 @@ bool ForestMapLayer:: init(){
 	//下方平台
 	Point* edgeDown = new Point[4];
 	
-	edgeDown[0] = Point(visibleSize.width/4,visibleSize.height/10);
+	/*edgeDown[0] = Point(visibleSize.width/4,visibleSize.height/10);
 	edgeDown[1] = Point(visibleSize.width*3/4,visibleSize.height/10);
 	edgeDown[2] = Point(visibleSize.width*3/4,0);
-	edgeDown[3] = Point(visibleSize.width/4,0);
+	edgeDown[3] = Point(visibleSize.width/4,0);*/
 	/*  全封闭平台
 	edgeDown[0] = Point(0,visibleSize.height/10);
 	edgeDown[1] = Point(visibleSize.width,visibleSize.height/10);
 	edgeDown[2] = Point(visibleSize.width,0);
 	edgeDown[3] = Point(0,0);
 	*/
-	auto edgeDownBody = PhysicsBody::createPolygon(edgeDown,4,PHYSICSBODY_MATERIAL_DEFAULT,Vec2(0,0));
+	auto edgeDownBody = PhysicsBody::createBox(Size(visibleSize.width/2,visibleSize.height/10),PHYSICSBODY_MATERIAL_DEFAULT,Vec2(0,0));
 	edgeDownBody->setDynamic(false);//不受力
 	auto edgeDownNode = Node::create();
-	edgeDownNode->setPosition(Point(0,0));
+	edgeDownNode->setPosition(visibleSize.width/2,visibleSize.height/20);
 	edgeDownNode->setPhysicsBody(edgeDownBody);
 	this->addChild(edgeDownNode);
 	//edgeDownBody->getShape(0)->setFriction(300);  //设置摩擦力
+	
+	//加入刚体至BodyInfo，设定刚体类型
+	addBody(edgeDownBody);
+	addShape(ShapeType::BOX);
 
 	//平台
 	PhysicsBody* plates[4];
@@ -66,6 +70,12 @@ bool ForestMapLayer:: init(){
 	plateNodes[1]->setPosition(Point(visibleSize.width*3/4,visibleSize.height*3/4));
 	plateNodes[2]->setPosition(Point(visibleSize.width/4,visibleSize.height*3/4));
 	plateNodes[3]->setPosition(Point(visibleSize.width*3/4,visibleSize.height/3));
+
+	//
+	for(int i=0;i<4;i++){
+		addBody(plates[i]);
+		addShape(ShapeType::BOX);
+	}
 
 	/*移动平台
 	mPlate = PhysicsBody::createBox(visibleSize/6,PHYSICSBODY_MATERIAL_DEFAULT);

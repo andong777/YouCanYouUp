@@ -22,7 +22,7 @@ bool ResultLayer::init(Result result){
 
 void ResultLayer::youWinInit()
 {
-	auto sp01= Sprite::create("youwin.jpg");
+	auto sp01= Sprite::create("youwin.png");
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	sp01->setPosition(visibleSize.width*0.5f,visibleSize.height*0.5f);
 	this ->addChild(sp01,0);
@@ -31,7 +31,7 @@ void ResultLayer::youWinInit()
 
 void ResultLayer::youLoseInit()
 {
-	auto sp02= Sprite::create("youlose.jpg");
+	auto sp02= Sprite::create("youlose.png");
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	sp02->setPosition(visibleSize.width*0.5f,visibleSize.height*0.5f);
 	this ->addChild(sp02,0);
@@ -41,8 +41,8 @@ void ResultLayer::youLoseInit()
 void ResultLayer::addButton()
 {
 	auto replayItem = MenuItemImage::create(
-									"replay.jpg",
-									"replay.jpg",
+									"replay.png",
+									"replay.png",
 									CC_CALLBACK_1(ResultLayer::menuReplayCallback,this));
 	auto exitItem = MenuItemImage::create(
 									"exit.png",

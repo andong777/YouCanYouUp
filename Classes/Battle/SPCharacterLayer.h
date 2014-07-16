@@ -1,15 +1,16 @@
 #include "cocos2d.h"
 #include "Character.h"
-#include "EnemyAI.h"
-#include <vector>
 #include "CharacterLayer.h"
+#include "Health.h"
+#include "AI/EnemyManager.h"
 
 class SPCharacterLayer : public CharacterLayer
 {
 private:
 
-	EnemyAI* enemyAI;
-	
+	//专供敌人管理
+	EnemyManager* enemyManager;
+
 	//判断胜负
 	void CheckResult();
 	//角色重生
@@ -20,6 +21,12 @@ private:
 	//触屏终止事件
 	virtual void onTouchEnded(Touch *touch, Event *unused_event);
 
+	//行动schedule
+	virtual void actionSchedule(float delta);
+
+	//恢复schedule 
+	virtual void recoverySchedule(float delta);
+
 public:
 
 	virtual bool init();  
@@ -27,7 +34,7 @@ public:
 	CREATE_FUNC(SPCharacterLayer);
 
 	void setHero(GameSetting::Character hero);
-	void setEnemy(GameSetting::Character enemy);
+	void setEnemy(std::vector<GameSetting::Character> enemy);
 
 };
 

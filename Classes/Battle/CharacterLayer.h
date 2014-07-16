@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "Character.h"
 #include "Health.h"
+#include <vector>
 
 class CharacterLayer : public cocos2d::Layer
 {
@@ -12,9 +13,12 @@ protected:
 
 	//触屏操作的起始和终止点
 	Point posBegan,posEnded;
+
 	//操控角色
 	Character* hero;
-	Character* enemy;
+
+	int hero_lives;
+	int enemy_lives;
 
 	//判断胜负
 	virtual void CheckResult() = 0;
@@ -27,20 +31,18 @@ protected:
 	virtual void onTouchEnded(Touch *touch, Event *unused_event) = 0;
 
 	Health* heroHealth;
-	void sendHealth(Object* obj){
-	/*
-	Health* health = (Health*)obj;
-	health->health = getHeroHealth();*/
-};
 	int getHeroHealth(){return hero->getHealth();};
+
+	//判断结果schedule
+	virtual void checkResSchedule(float delta){ CheckResult(); };
+
+	//恢复schedule 
+	virtual void recoverySchedule(float delta) = 0;
 
 public:
 
-	//schedule调用函数
-	virtual void scheduleCallBack(float fDelta){ CheckResult(); };
-
 	virtual void setHero(GameSetting::Character hero){};
-	virtual void setEnemy(GameSetting::Character enemy){};
+	virtual void setEnemy(std::vector<GameSetting::Character> enemy){};
 
 };
 

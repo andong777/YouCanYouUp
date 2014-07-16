@@ -28,9 +28,9 @@ bool OnlineScene::init()
 	return_->addTouchEventListener(CC_CALLBACK_2(OnlineScene::returnEvent, this));
 
 	// 找到显示用户名的文本框
-	text = (Label*)(ui::Helper::seekWidgetByName(pNode, "playername"));
+	text = (Text*)(ui::Helper::seekWidgetByName(pNode, "playername"));
 	std::string username = UserDefault::getInstance()->getStringForKey("username");
-	text->setString(username);
+	text->setText(username);
 
 	return true;
 }

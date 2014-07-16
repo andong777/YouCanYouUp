@@ -20,7 +20,7 @@ public:
 
 private:
 	// 显示用户名的文本框
-	cocos2d::Label *text;
+	cocos2d::ui::Text *text;
 
 };
 

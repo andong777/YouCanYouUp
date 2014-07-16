@@ -2,11 +2,13 @@
 #include "Character.h"
 #include "network/WebSocket.h"
 #include "CharacterLayer.h"
+#include "extensions/cocos-ext.h"
+#include "network/HttpClient.h"
 
 class MPCharacterLayer : public CharacterLayer, public cocos2d::network::WebSocket::Delegate
 {
 private:
-
+	Character *enemy;
 	//判断胜负
 	void CheckResult();
 	//角色重生
@@ -17,6 +19,9 @@ private:
 	//触屏终止事件
 	virtual void onTouchEnded(Touch *touch, Event *unused_event);
 
+	//恢复schedule 
+	virtual void recoverySchedule(float delta);
+
 public:
 
 	virtual bool init();  
@@ -24,7 +29,7 @@ public:
 	CREATE_FUNC(MPCharacterLayer);
 
 	void setHero(GameSetting::Character hero);
-	void setEnemy(GameSetting::Character enemy);
+	void setEnemy(std::vector<GameSetting::Character> enemy);
 
 	// for virtual function in websocket delegate
 	virtual void onOpen(cocos2d::network::WebSocket* ws);

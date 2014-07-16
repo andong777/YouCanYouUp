@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 #include "CocosGUI.h" 
+#include "extensions/cocos-ext.h"
+#include "network/HttpClient.h"
 
 class RecordScene : public cocos2d::Scene
 {
@@ -13,6 +15,12 @@ public:
     CREATE_FUNC(RecordScene);
 
 	void returnEvent(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	void onHttpRequestCompleted(cocos2d::network::HttpClient *sender, cocos2d::network::HttpResponse *response);
+
+private:
+	cocos2d::ui::ScrollView *list;
+
 };
 
 #endif // __RECORD_SCENE_H__

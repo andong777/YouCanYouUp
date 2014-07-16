@@ -4,16 +4,16 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>game resources/bg.png</key>
+			<key>home.png</key>
 			<dict>
 				<key>width</key>
-				<integer>316</integer>
+				<integer>960</integer>
 				<key>height</key>
-				<integer>251</integer>
+				<integer>640</integer>
 				<key>originalWidth</key>
-				<integer>316</integer>
+				<integer>960</integer>
 				<key>originalHeight</key>
-				<integer>251</integer>
+				<integer>640</integer>
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
@@ -23,20 +23,39 @@
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
-			<key>game resources/Back-btn.png</key>
+			<key>frame.png</key>
 			<dict>
 				<key>width</key>
-				<integer>69</integer>
+				<integer>203</integer>
 				<key>height</key>
-				<integer>71</integer>
+				<integer>44</integer>
 				<key>originalWidth</key>
-				<integer>69</integer>
+				<integer>203</integer>
 				<key>originalHeight</key>
-				<integer>71</integer>
+				<integer>44</integer>
 				<key>x</key>
-				<integer>318</integer>
-				<key>y</key>
 				<integer>0</integer>
+				<key>y</key>
+				<integer>642</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>返回.png</key>
+			<dict>
+				<key>width</key>
+				<integer>200</integer>
+				<key>height</key>
+				<integer>200</integer>
+				<key>originalWidth</key>
+				<integer>200</integer>
+				<key>originalHeight</key>
+				<integer>200</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>688</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -53,9 +72,9 @@
 				<key>originalHeight</key>
 				<integer>71</integer>
 				<key>x</key>
-				<integer>389</integer>
+				<integer>205</integer>
 				<key>y</key>
-				<integer>0</integer>
+				<integer>642</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -72,9 +91,9 @@
 				<key>originalHeight</key>
 				<integer>69</integer>
 				<key>x</key>
-				<integer>460</integer>
-				<key>y</key>
 				<integer>0</integer>
+				<key>y</key>
+				<integer>890</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -91,9 +110,9 @@
 				<key>originalHeight</key>
 				<integer>69</integer>
 				<key>x</key>
-				<integer>672</integer>
+				<integer>276</integer>
 				<key>y</key>
-				<integer>0</integer>
+				<integer>642</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -110,28 +129,28 @@
 				<key>originalHeight</key>
 				<integer>69</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>202</integer>
 				<key>y</key>
-				<integer>253</integer>
+				<integer>715</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
-			<key>2.png</key>
+			<key>touxiang.png</key>
 			<dict>
 				<key>width</key>
-				<integer>161</integer>
+				<integer>126</integer>
 				<key>height</key>
-				<integer>143</integer>
+				<integer>146</integer>
 				<key>originalWidth</key>
-				<integer>161</integer>
+				<integer>126</integer>
 				<key>originalHeight</key>
-				<integer>143</integer>
+				<integer>146</integer>
 				<key>x</key>
-				<integer>212</integer>
+				<integer>414</integer>
 				<key>y</key>
-				<integer>253</integer>
+				<integer>713</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -150,7 +169,45 @@
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
-				<integer>398</integer>
+				<integer>961</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>exit2.png</key>
+			<dict>
+				<key>width</key>
+				<integer>200</integer>
+				<key>height</key>
+				<integer>200</integer>
+				<key>originalWidth</key>
+				<integer>200</integer>
+				<key>originalHeight</key>
+				<integer>200</integer>
+				<key>x</key>
+				<integer>542</integer>
+				<key>y</key>
+				<integer>642</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>touxiang2.png</key>
+			<dict>
+				<key>width</key>
+				<integer>96</integer>
+				<key>height</key>
+				<integer>112</integer>
+				<key>originalWidth</key>
+				<integer>96</integer>
+				<key>originalHeight</key>
+				<integer>112</integer>
+				<key>x</key>
+				<integer>542</integer>
+				<key>y</key>
+				<integer>844</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -167,9 +224,9 @@
 				<key>originalHeight</key>
 				<integer>47</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>962</integer>
 				<key>y</key>
-				<integer>451</integer>
+				<integer>0</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -186,66 +243,142 @@
 				<key>originalHeight</key>
 				<integer>51</integer>
 				<key>x</key>
-				<integer>491</integer>
+				<integer>202</integer>
 				<key>y</key>
-				<integer>451</integer>
+				<integer>786</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
-			<key>Info_btn.png</key>
+			<key>单人模式.png</key>
 			<dict>
 				<key>width</key>
-				<integer>69</integer>
+				<integer>191</integer>
 				<key>height</key>
-				<integer>71</integer>
+				<integer>132</integer>
 				<key>originalWidth</key>
-				<integer>69</integer>
+				<integer>191</integer>
 				<key>originalHeight</key>
-				<integer>71</integer>
+				<integer>132</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>962</integer>
 				<key>y</key>
-				<integer>504</integer>
+				<integer>49</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
-			<key>More_games_btn.png</key>
+			<key>对战模式.png</key>
 			<dict>
 				<key>width</key>
-				<integer>69</integer>
+				<integer>203</integer>
 				<key>height</key>
-				<integer>72</integer>
+				<integer>135</integer>
 				<key>originalWidth</key>
-				<integer>69</integer>
+				<integer>203</integer>
 				<key>originalHeight</key>
-				<integer>72</integer>
+				<integer>135</integer>
 				<key>x</key>
-				<integer>71</integer>
+				<integer>962</integer>
 				<key>y</key>
-				<integer>504</integer>
+				<integer>183</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
-			<key>Help-btn.png</key>
+			<key>帮助模式.png</key>
 			<dict>
 				<key>width</key>
-				<integer>69</integer>
+				<integer>174</integer>
 				<key>height</key>
-				<integer>71</integer>
+				<integer>108</integer>
 				<key>originalWidth</key>
-				<integer>69</integer>
+				<integer>174</integer>
 				<key>originalHeight</key>
-				<integer>71</integer>
+				<integer>108</integer>
 				<key>x</key>
-				<integer>142</integer>
+				<integer>1155</integer>
 				<key>y</key>
-				<integer>504</integer>
+				<integer>49</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>helppaint.png</key>
+			<dict>
+				<key>width</key>
+				<integer>960</integer>
+				<key>height</key>
+				<integer>640</integer>
+				<key>originalWidth</key>
+				<integer>960</integer>
+				<key>originalHeight</key>
+				<integer>640</integer>
+				<key>x</key>
+				<integer>962</integer>
+				<key>y</key>
+				<integer>320</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>地图1.png</key>
+			<dict>
+				<key>width</key>
+				<integer>381</integer>
+				<key>height</key>
+				<integer>246</integer>
+				<key>originalWidth</key>
+				<integer>381</integer>
+				<key>originalHeight</key>
+				<integer>246</integer>
+				<key>x</key>
+				<integer>1331</integer>
+				<key>y</key>
+				<integer>49</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>xbutton.png</key>
+			<dict>
+				<key>width</key>
+				<integer>43</integer>
+				<key>height</key>
+				<integer>45</integer>
+				<key>originalWidth</key>
+				<integer>43</integer>
+				<key>originalHeight</key>
+				<integer>45</integer>
+				<key>x</key>
+				<integer>202</integer>
+				<key>y</key>
+				<integer>839</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>points.png</key>
+			<dict>
+				<key>width</key>
+				<integer>196</integer>
+				<key>height</key>
+				<integer>68</integer>
+				<key>originalWidth</key>
+				<integer>196</integer>
+				<key>originalHeight</key>
+				<integer>68</integer>
+				<key>x</key>
+				<integer>212</integer>
+				<key>y</key>
+				<integer>886</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -262,28 +395,9 @@
 				<key>originalHeight</key>
 				<integer>71</integer>
 				<key>x</key>
-				<integer>213</integer>
+				<integer>297</integer>
 				<key>y</key>
-				<integer>504</integer>
-				<key>offsetX</key>
-				<real>0</real>
-				<key>offsetY</key>
-				<real>0</real>
-			</dict>
-			<key>map.jpg</key>
-			<dict>
-				<key>width</key>
-				<integer>75</integer>
-				<key>height</key>
-				<integer>71</integer>
-				<key>originalWidth</key>
-				<integer>75</integer>
-				<key>originalHeight</key>
-				<integer>71</integer>
-				<key>x</key>
-				<integer>284</integer>
-				<key>y</key>
-				<integer>504</integer>
+				<integer>786</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -295,16 +409,16 @@
 			<key>format</key>
 			<integer>0</integer>
 			<key>textureFileName</key>
-			<string>OnlineUI10.png</string>
+			<string>OnlineUI1project0.png</string>
 			<key>realTextureFileName</key>
-			<string>OnlineUI10.png</string>
+			<string>OnlineUI1project0.png</string>
 			<key>size</key>
-			<string>{1024,1024}</string>
+			<string>{2048,1024}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
-			<integer>1024</integer>
+			<integer>2048</integer>
 			<key>height</key>
 			<integer>1024</integer>
 		</dict>

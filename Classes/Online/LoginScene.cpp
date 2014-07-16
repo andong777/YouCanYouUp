@@ -3,6 +3,7 @@
 #include "SignupScene.h"
 #include "OnlineScene.h"
 #include "base/CCUserDefault.h"
+#include "Global.h"
 
 USING_NS_CC;
 using namespace cocostudio;
@@ -27,6 +28,9 @@ bool LoginScene::init()
 	// 找到两个输入框
 	username = (TextField*)(ui::Helper::seekWidgetByName(pNode, "username"));
 	password = (TextField*)(ui::Helper::seekWidgetByName(pNode, "code"));
+	// 从UserDefault中读取用户信息
+	username->setText(UserDefault::getInstance()->getStringForKey("username"));
+	password->setText(UserDefault::getInstance()->getStringForKey("password"));
 	return true;
 }
 
@@ -58,7 +62,7 @@ void LoginScene::loginEvent(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		std::string password_s = password->getStringValue();
 		CCLOG("GET-Login");
 		HttpRequest* request = new HttpRequest();  
-		std::string url = "http://whydemo.sinaapp.com/whyuser/sign_in/"+username_s+"/"+password_s;
+		std::string url = LOGIN_SERVER_URL + username_s + "/" + password_s;
 		request->setUrl(url.c_str());  
 		request->setRequestType(HttpRequest::Type::GET);  
 		request->setResponseCallback(this, httpresponse_selector(LoginScene::onHttpRequestCompleted));    
@@ -80,8 +84,11 @@ void LoginScene::onHttpRequestCompleted(HttpClient *sender, HttpResponse *respon
 	if(res == '1')
 	{
 		// 加入用户信息
-		UserDefault::getInstance()->setStringForKey("username", username->getStringValue());
-		UserDefault::getInstance()->setStringForKey("password", password->getStringValue());
+		UserDefault *ud = UserDefault::getInstance();
+		ud->setStringForKey("username", username->getStringValue());
+		ud->setStringForKey("password", password->getStringValue());
+		ud->flush();
+
 		Scene *online = OnlineScene::create(); 
 		TransitionScene *transition = TransitionFade::create(0.5, online);
 		Director::getInstance()->pushScene(transition);

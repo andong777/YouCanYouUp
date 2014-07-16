@@ -16,11 +16,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLView::create("My Game");
+        glview = GLView::create("YouCanYouUp");
         director->setOpenGLView(glview);
     }
 
-	//glview->setDesignResolutionSize(640, 960, ResolutionPolicy::SHOW_ALL);
+	glview->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
 
     // turn on display FPS
     director->setDisplayStats(true);

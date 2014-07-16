@@ -15,7 +15,6 @@ public:
 
 	void returnEvent(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void selectEvent(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-	void nextEvent(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 private:
 	// 用户选择的人物
@@ -25,7 +24,6 @@ private:
 	cocos2d::ui::Widget * cha2Btn;
 	// 其他按钮
 	cocos2d::ui::Button * returnBtn;
-	cocos2d::ui::Button * nextBtn;
 };
 
 

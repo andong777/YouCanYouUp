@@ -1,11 +1,18 @@
 #include "MPCharacterLayer.h"
 #include "CmdTool.h"
+#include "Global.h"
+#include "ResultLayer.h"
+
+using namespace network;
 
 bool MPCharacterLayer:: init()
 {
+	int hero_lives = INITIAL_LIVES;
+	int enemy_lives = INITIAL_LIVES;
+
 	// ---------- WebSocket ---------
 	_wsiClient = new cocos2d::network::WebSocket();
-	_wsiClient->init(*this, "ws://202.194.14.196:8001");
+	_wsiClient->init(*this, WS_SERVER_URL);
 	// ---------- WebSocket ---------
 
 	//触屏事件监听
@@ -17,10 +24,16 @@ bool MPCharacterLayer:: init()
 	listener->setSwallowTouches(true);//不向下传递触摸
 	dispatcher->addEventListenerWithSceneGraphPriority(listener,this);
 
-	//定时判断角色状态
-	this->schedule(schedule_selector(CharacterLayer::scheduleCallBack), 1.f);  
+	//定时恢复体力
+	this->schedule(schedule_selector(MPCharacterLayer::recoverySchedule), .5f);
+	//定时判断结果
+	this->schedule(schedule_selector(MPCharacterLayer::checkResSchedule), 1.f);
 
 	return true;
+}
+
+void MPCharacterLayer::recoverySchedule(float fDelta){
+	hero->recovery(3);//每次恢复3hp
 }
 
 bool MPCharacterLayer::onTouchBegan(Touch *pTouch, Event *pEvent){
@@ -41,12 +54,36 @@ void MPCharacterLayer::onTouchEnded(Touch *touch, Event *unused_event){
 void MPCharacterLayer::CheckResult(){
 	float heroY = hero->getSprite()->getPositionY();
 	if(heroY<0){
-		CCLOG("you lose");
-		Rebirth(hero);
+		if(--hero_lives){
+			NotificationCenter::sharedNotificationCenter()->postNotification("loseHeroLife",NULL);
+			Rebirth(hero);
+		}
+		else{
+			CCLOG("You lose!");
+			this->getScene()->addChild(ResultLayer::create(Result::LOSE));
+			Director::getInstance()->getRunningScene()->getPhysicsWorld()->setSpeed(0);
+		}
 	}
 	float enemyY = enemy->getSprite()->getPositionY();
 	if(enemy<0){
-		CCLOG("you win");
+		if(--enemy_lives){
+				NotificationCenter::sharedNotificationCenter()->postNotification("loseEnemyLife",NULL);
+				Rebirth(enemy);
+			}
+			else{
+				CCLOG("You win!");
+				this->getScene()->addChild(ResultLayer::create(Result::WIN));
+				Director::getInstance()->getRunningScene()->getPhysicsWorld()->setSpeed(0);
+				CCLOG("GET-AddScore");
+				HttpRequest* request = new HttpRequest();  
+				std::string username_s = UserDefault::getInstance()->getStringForKey("username");
+				std::string url = ADD_SCORE_SERVER_URL + username_s;
+				request->setUrl(url.c_str());  
+				request->setRequestType(HttpRequest::Type::GET);  
+				request->setTag("GET-AddScore");  
+				HttpClient::getInstance()->send(request);  
+				request->release();
+			}
 	}
 }
 
@@ -59,7 +96,6 @@ void MPCharacterLayer::Rebirth(Character* cha){
 
 MPCharacterLayer::~MPCharacterLayer(){
 	delete hero;
-	delete enemy;
 	
 }
 
@@ -71,10 +107,10 @@ void MPCharacterLayer::setHero(GameSetting::Character hero)
 	this->addChild(this->hero->getSprite());
 }
 
-void MPCharacterLayer::setEnemy(GameSetting::Character enemy)
+void MPCharacterLayer::setEnemy(std::vector<GameSetting::Character> enemy)
 {
-	this->enemy = new Character(enemy);
-	this->hero->setPosition(Vec2(500,500));
+	this->enemy = new Character(enemy[0]);
+	this->enemy->setPosition(Vec2(500,500));
 	this->addChild(this->enemy->getSprite());
 }
 
