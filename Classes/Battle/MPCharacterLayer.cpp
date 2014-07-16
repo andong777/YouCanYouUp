@@ -3,6 +3,8 @@
 #include "Global.h"
 #include "ResultLayer.h"
 
+using namespace network;
+
 bool MPCharacterLayer:: init()
 {
 	int hero_lives = INITIAL_LIVES;
@@ -53,6 +55,7 @@ void MPCharacterLayer::CheckResult(){
 	float heroY = hero->getSprite()->getPositionY();
 	if(heroY<0){
 		if(--hero_lives){
+			NotificationCenter::sharedNotificationCenter()->postNotification("loseHeroLife",NULL);
 			Rebirth(hero);
 		}
 		else{
@@ -64,12 +67,22 @@ void MPCharacterLayer::CheckResult(){
 	float enemyY = enemy->getSprite()->getPositionY();
 	if(enemy<0){
 		if(--enemy_lives){
+				NotificationCenter::sharedNotificationCenter()->postNotification("loseEnemyLife",NULL);
 				Rebirth(enemy);
 			}
 			else{
 				CCLOG("You win!");
 				this->getScene()->addChild(ResultLayer::create(Result::WIN));
 				Director::getInstance()->getRunningScene()->getPhysicsWorld()->setSpeed(0);
+				CCLOG("GET-AddScore");
+				HttpRequest* request = new HttpRequest();  
+				std::string username_s = UserDefault::getInstance()->getStringForKey("username");
+				std::string url = ADD_SCORE_SERVER_URL + username_s;
+				request->setUrl(url.c_str());  
+				request->setRequestType(HttpRequest::Type::GET);  
+				request->setTag("GET-AddScore");  
+				HttpClient::getInstance()->send(request);  
+				request->release();
 			}
 	}
 }

@@ -28,6 +28,9 @@ bool LoginScene::init()
 	// 找到两个输入框
 	username = (TextField*)(ui::Helper::seekWidgetByName(pNode, "username"));
 	password = (TextField*)(ui::Helper::seekWidgetByName(pNode, "code"));
+	// 从UserDefault中读取用户信息
+	username->setText(UserDefault::getInstance()->getStringForKey("username"));
+	password->setText(UserDefault::getInstance()->getStringForKey("password"));
 	return true;
 }
 
@@ -57,8 +60,6 @@ void LoginScene::loginEvent(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	case Widget::TouchEventType::ENDED:
 		std::string username_s = username->getStringValue();
 		std::string password_s = password->getStringValue();
-		/*std::string username_s = "andong777";
-		std::string password_s = "123";*/
 		CCLOG("GET-Login");
 		HttpRequest* request = new HttpRequest();  
 		std::string url = LOGIN_SERVER_URL + username_s + "/" + password_s;

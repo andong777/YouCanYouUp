@@ -2,6 +2,8 @@
 #include "Character.h"
 #include "network/WebSocket.h"
 #include "CharacterLayer.h"
+#include "extensions/cocos-ext.h"
+#include "network/HttpClient.h"
 
 class MPCharacterLayer : public CharacterLayer, public cocos2d::network::WebSocket::Delegate
 {

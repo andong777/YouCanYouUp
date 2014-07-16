@@ -62,6 +62,7 @@ void SPCharacterLayer::CheckResult(){
 	float heroY = hero->getSprite()->getPositionY();
 	if(heroY<0){
 		if(--hero_lives){
+			NotificationCenter::sharedNotificationCenter()->postNotification("loseHeroLife",NULL);
 			Rebirth(hero);
 		}
 		else{
@@ -79,6 +80,7 @@ void SPCharacterLayer::CheckResult(){
 		if(enemyY<0)
 		{
 			if(--enemy_lives){
+				NotificationCenter::sharedNotificationCenter()->postNotification("loseEnemyLife",NULL);
 				Rebirth(e);
 			}
 			else{

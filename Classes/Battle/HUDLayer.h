@@ -2,8 +2,10 @@
 #define _UILAYER_H_
 
 #include "cocos2d.h"
-//#include "BattleScene.h"
 #include "Health.h"
+#include "CocosGUI.h" 
+#include "Global.h"
+#include <vector>
 
 USING_NS_CC;
 
@@ -11,14 +13,24 @@ class HUDLayer:  public cocos2d::Layer
 {
 private:
 	void scheduleCallBack(float delta);
-	//BattleScene* battleScene;
-	//CharacterLayer* characterLayer;
+
 	Sprite* healthBar;
 	Health* heroHealth;
+	
 	//获得主角体力的回调函数
 	void getHealth(Object* pSender);
 
+	//显示生命用的精灵向量
+	std::vector<Sprite*> heroLife;
+	std::vector<Sprite*> enemyLife;
+	//削减生命数
+	void loseHeroLife(Object* pSender);
+	void loseEnemyLife(Object* pSender);
+	void initHeroLife(int num);
+	void initEnemyLife(int num);
+
 protected:
+
 	virtual bool init();  
 
 public:
@@ -29,9 +41,7 @@ public:
 	}
 	
 	CREATE_FUNC(HUDLayer);
-	
 
 };
-
 
 #endif
