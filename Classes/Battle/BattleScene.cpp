@@ -35,7 +35,7 @@ Scene* BattleScene::createScene(bool online, GameSetting::Character hero, GameSe
 	scene->addChild(uiLayer);
 
 	//设置物理世界刚体可见
-	scene->getPhysicsWorld()->setDebugDrawMask(true);
+	//scene->getPhysicsWorld()->setDebugDrawMask(true);
 	//设置物理世界的重力和倍速
 	scene->getPhysicsWorld()->setGravity(Vec2(0,-300));
 	scene->getPhysicsWorld()->setSpeed(1.5f);
@@ -53,6 +53,9 @@ Layer* BattleScene::selectMap(GameSetting::Map map){
 	}
 	if(map==GameSetting::Map::SNOW){
 		return SnowMapLayer::create();
+	}
+	if(map==GameSetting::Map::DESERT){
+		return DesertMapLayer::create();
 	}
 	return nullptr;
 }

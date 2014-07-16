@@ -23,8 +23,8 @@ private:
 	GameSetting::Character charSelected;
 	GameSetting::Map mapSelected;
 	// µØÍ¼°´Å¥
-	cocos2d::ui::Button * defaultBtn;
-	cocos2d::ui::Button * snowBtn;
+	cocos2d::ui::Button * desertBtn;
+	cocos2d::ui::Button * forestBtn;
 };
 
 

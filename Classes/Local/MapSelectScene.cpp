@@ -16,11 +16,11 @@ bool MapSelectScene::init()
 	this->addChild(pNode);
 
 	Button *return_ = (Button*)(ui::Helper::seekWidgetByName(pNode, "Button_1"));
-	defaultBtn = (Button*)(ui::Helper::seekWidgetByName(pNode, "Button_3"));
-	snowBtn = (Button*)(ui::Helper::seekWidgetByName(pNode, "Button_4"));
+	desertBtn = (Button*)(ui::Helper::seekWidgetByName(pNode, "Button_3"));
+	forestBtn = (Button*)(ui::Helper::seekWidgetByName(pNode, "Button_4"));
 
-	defaultBtn->addTouchEventListener(CC_CALLBACK_2(MapSelectScene::selectEvent, this));
-	snowBtn->addTouchEventListener(CC_CALLBACK_2(MapSelectScene::selectEvent, this));
+	desertBtn->addTouchEventListener(CC_CALLBACK_2(MapSelectScene::selectEvent, this));
+	forestBtn->addTouchEventListener(CC_CALLBACK_2(MapSelectScene::selectEvent, this));
 	return_->addTouchEventListener(CC_CALLBACK_2(MapSelectScene::returnEvent, this));
 	return true;
 }
@@ -30,13 +30,13 @@ void MapSelectScene::selectEvent(Ref *pSender, Widget::TouchEventType type)
 	switch(type)
 	{
 	case Widget::TouchEventType::ENDED:
-		if(pSender == defaultBtn)
+		if(pSender == desertBtn)
+		{
+			mapSelected = GameSetting::Map::DESERT;
+		}
+		else if(pSender == forestBtn)
 		{
 			mapSelected = GameSetting::Map::FOREST;
-		}
-		else if(pSender == snowBtn)
-		{
-			mapSelected = GameSetting::Map::SNOW;
 		}
 		std::vector<GameSetting::Character> enemy;
 		enemy.push_back(GameSetting::Character::CHARACTER2);

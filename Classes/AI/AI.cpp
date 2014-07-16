@@ -308,7 +308,6 @@ void AI::actions()
 		eList[i].push_back(tPos);
 		eListSize[i]++;
 	}
-	CCLOG("*****************");
 	if(!ready)
 		return;
 
@@ -316,5 +315,4 @@ void AI::actions()
 	{
 		states[i]->action();
 	}
-	CCLOG("###################");
 }

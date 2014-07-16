@@ -19,10 +19,16 @@ bool MPCharacterLayer:: init()
 	listener->setSwallowTouches(true);//不向下传递触摸
 	dispatcher->addEventListenerWithSceneGraphPriority(listener,this);
 
-	//定时判断角色状态
-	this->schedule(schedule_selector(CharacterLayer::scheduleCallBack), 1.f);  
+	//定时恢复体力
+	this->schedule(schedule_selector(MPCharacterLayer::recoverySchedule), .5f);
+	//定时判断结果
+	this->schedule(schedule_selector(MPCharacterLayer::checkResSchedule), 1.f);
 
 	return true;
+}
+
+void MPCharacterLayer::recoverySchedule(float fDelta){
+	hero->recovery(3);//每次恢复3hp
 }
 
 bool MPCharacterLayer::onTouchBegan(Touch *pTouch, Event *pEvent){

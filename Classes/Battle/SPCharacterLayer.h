@@ -21,7 +21,11 @@ private:
 	//触屏终止事件
 	virtual void onTouchEnded(Touch *touch, Event *unused_event);
 
-	void scheduleCallBack(float fDelta);
+	//行动schedule
+	virtual void actionSchedule(float delta);
+
+	//恢复schedule 
+	virtual void recoverySchedule(float delta);
 
 public:
 

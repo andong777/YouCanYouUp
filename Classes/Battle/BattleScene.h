@@ -3,8 +3,9 @@
 #include "cocos2d.h"
 #include "ForestMapLayer.h"
 #include "SnowMapLayer.h"
-#include "MPCharacterLayer.h"
+#include "DesertMapLayer.h"
 #include "SPCharacterLayer.h"
+#include "MPCharacterLayer.h"
 #include "GameSetting.h"
 #include "HUDLayer.h"
 #include <vector>

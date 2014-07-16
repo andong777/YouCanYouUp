@@ -17,18 +17,27 @@ bool SPCharacterLayer:: init()
 	dispatcher->addEventListenerWithSceneGraphPriority(listener,this);
 
 	//定时判断角色状态
-	this->schedule(schedule_selector(CharacterLayer::scheduleCallBack), (double)(AI::delta) / 100);
+	this->schedule(schedule_selector(SPCharacterLayer::actionSchedule), (double)(AI::delta) / 100);
+	//定时恢复体力
+	this->schedule(schedule_selector(SPCharacterLayer::recoverySchedule), .5f);
+	//定时判断结果
+	this->schedule(schedule_selector(SPCharacterLayer::checkResSchedule), 1.f);
 
 	return true;
 }
 
-void SPCharacterLayer::scheduleCallBack(float fDelta){
-	CheckResult();
-
+void SPCharacterLayer::actionSchedule(float fDelta){
 	enemyManager->action();
 
 	hero->recovery(3);//每次恢复3hp
+	enemyManager->recovery(3);
 
+	heroHealth->health = getHeroHealth();
+	NotificationCenter::sharedNotificationCenter()->postNotification("getHealth",heroHealth);
+}
+
+void SPCharacterLayer::recoverySchedule(float fDelta){
+	hero->recovery(3);//每次恢复3hp
 	enemyManager->recovery(3);
 
 	heroHealth->health = getHeroHealth();

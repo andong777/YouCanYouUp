@@ -30,17 +30,15 @@ protected:
 	virtual void onTouchEnded(Touch *touch, Event *unused_event) = 0;
 
 	Health* heroHealth;
-	void sendHealth(Object* obj){
-	/*
-	Health* health = (Health*)obj;
-	health->health = getHeroHealth();*/
-};
 	int getHeroHealth(){return hero->getHealth();};
 
-public:
+	//判断结果schedule
+	virtual void checkResSchedule(float delta){ CheckResult(); };
 
-	//schedule调用函数
-	virtual void scheduleCallBack(float fDelta){ CheckResult(); };
+	//恢复schedule 
+	virtual void recoverySchedule(float delta) = 0;
+
+public:
 
 	virtual void setHero(GameSetting::Character hero){};
 	virtual void setEnemy(std::vector<GameSetting::Character> enemy){};

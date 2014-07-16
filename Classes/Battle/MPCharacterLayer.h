@@ -17,6 +17,9 @@ private:
 	//´¥ÆÁÖÕÖ¹ÊÂ¼ş
 	virtual void onTouchEnded(Touch *touch, Event *unused_event);
 
+	//»Ö¸´schedule 
+	virtual void recoverySchedule(float delta);
+
 public:
 
 	virtual bool init();  

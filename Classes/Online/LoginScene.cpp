@@ -82,8 +82,11 @@ void LoginScene::onHttpRequestCompleted(HttpClient *sender, HttpResponse *respon
 	if(res == '1')
 	{
 		// 加入用户信息
-		UserDefault::getInstance()->setStringForKey("username", username->getStringValue());
-		UserDefault::getInstance()->setStringForKey("password", password->getStringValue());
+		UserDefault *ud = UserDefault::getInstance();
+		ud->setStringForKey("username", username->getStringValue());
+		ud->setStringForKey("password", password->getStringValue());
+		ud->flush();
+
 		Scene *online = OnlineScene::create(); 
 		TransitionScene *transition = TransitionFade::create(0.5, online);
 		Director::getInstance()->pushScene(transition);
