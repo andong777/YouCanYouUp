@@ -12,7 +12,7 @@ bool MapSelectScene::init()
 		return false;
 	}
 
-	Widget *pNode = (Widget*)(GUIReader::getInstance()->widgetFromJsonFile("mapUI.ExportJson"));
+	Widget *pNode = (Widget*)(GUIReader::getInstance()->widgetFromJsonFile("single.ExportJson"));
 	this->addChild(pNode);
 
 	Button *return_ = (Button*)(ui::Helper::seekWidgetByName(pNode, "Button_1"));

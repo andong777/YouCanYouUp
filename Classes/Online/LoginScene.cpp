@@ -56,6 +56,8 @@ void LoginScene::loginEvent(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	case Widget::TouchEventType::ENDED:
 		std::string username_s = username->getStringValue();
 		std::string password_s = password->getStringValue();
+		/*std::string username_s = "andong777";
+		std::string password_s = "123";*/
 		CCLOG("GET-Login");
 		HttpRequest* request = new HttpRequest();  
 		std::string url = "http://whydemo.sinaapp.com/whyuser/sign_in/"+username_s+"/"+password_s;
