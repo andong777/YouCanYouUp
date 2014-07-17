@@ -10,9 +10,12 @@ bool MPCharacterLayer:: init()
 	int hero_lives = INITIAL_LIVES;
 	int enemy_lives = INITIAL_LIVES;
 
+		CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic(false); //关闭原先的背景音乐
+
 	// ---------- WebSocket ---------
 	_wsiClient = new cocos2d::network::WebSocket();
 	_wsiClient->init(*this, WS_SERVER_URL);
+	this->schedule(schedule_selector(MPCharacterLayer::sendFightCmd),1.0f);
 	// ---------- WebSocket ---------
 
 	//触屏事件监听
@@ -29,8 +32,18 @@ bool MPCharacterLayer:: init()
 	//定时判断结果
 	this->schedule(schedule_selector(MPCharacterLayer::checkResSchedule), 1.f);
 
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Music/fighting.mp3",true); //播放背景音乐
+
+
 	return true;
 }
+
+void MPCharacterLayer::sendFightCmd(float fDelta)
+{
+	_wsiClient->send("fight");
+	this->unschedule(schedule_selector(MPCharacterLayer::sendFightCmd));
+}
+
 
 void MPCharacterLayer::recoverySchedule(float fDelta){
 	hero->recovery(3);//每次恢复3hp
@@ -45,10 +58,9 @@ void MPCharacterLayer::onTouchEnded(Touch *touch, Event *unused_event){
 	posEnded = touch->getLocation();
 	Vec2 force=2*(posEnded-posBegan);
 
-	CCLOG("%f, %f", hero->getPosition().x, hero->getPosition().y);
 	_wsiClient->send("fight!key="+enemyKey+"&px="+std::to_string(hero->getPosition().x)+"&py="+
 		std::to_string(hero->getPosition().y)+"&fx="+std::to_string(force.x)+"&fy="+std::to_string(force.y));
-
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/touch.wav"); //播放音效
 
 }
 
@@ -61,7 +73,10 @@ void MPCharacterLayer::CheckResult(){
 		}
 		else{
 			CCLOG("You lose!");
+			enemy_lives = INITIAL_LIVES;
 			this->getScene()->addChild(ResultLayer::create(Result::LOSE));
+			CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic(false); //关闭背景音乐
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/lost.wav"); //播放音效
 			Director::getInstance()->getRunningScene()->getPhysicsWorld()->setSpeed(0);
 		}
 	}
@@ -73,7 +88,12 @@ void MPCharacterLayer::CheckResult(){
 			}
 			else{
 				CCLOG("You win!");
+				hero_lives = INITIAL_LIVES;
 				this->getScene()->addChild(ResultLayer::create(Result::WIN));
+
+				CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic(false); //关闭背景音乐
+				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/win.wav"); //播放音效
+
 				Director::getInstance()->getRunningScene()->getPhysicsWorld()->setSpeed(0);
 				CCLOG("GET-AddScore");
 				HttpRequest* request = new HttpRequest();  
@@ -91,6 +111,7 @@ void MPCharacterLayer::CheckResult(){
 void MPCharacterLayer::Rebirth(Character* cha){
 	Vec2 force = Vec2::ZERO;
 	Vec2 vec = Vec2(300, 500);
+	cha->setPosition(vec);
 	_wsiClient->send("fight!key="+enemyKey+"&px="+std::to_string(vec.x)+"&py="+
 	std::to_string(vec.y)+"&fx="+std::to_string(force.x)+"&fy="+std::to_string(force.y));
 }
@@ -130,6 +151,21 @@ void MPCharacterLayer::onMessage(cocos2d::network::WebSocket* ws, const cocos2d:
     CCLOG("收到的消息：%s",msgStr.c_str());
     std::string cmdStr = CmdTool::getCmd(msgStr);
     std::string cmdPara = CmdTool::getCmdPara(msgStr);
+
+		int initNum = 0;
+		if (cmdStr == "enemy0") {
+			CCLOG("匹配到对手，对手Key=%s",cmdPara.c_str());
+			enemyKey = cmdPara;
+			initNum = 0;
+			initBattleScene(initNum);
+		}
+    
+		if (cmdStr == "enemy1") {
+			CCLOG("匹配到对手，对手Key=%s",cmdPara.c_str());
+			enemyKey = cmdPara;
+			initNum = 1;
+			initBattleScene(initNum);
+		}
  
     // ---------- 收到服务器发送的打斗事件 ----------
     if (cmdStr == "fight") {

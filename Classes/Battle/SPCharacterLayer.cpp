@@ -4,6 +4,8 @@
 
 bool SPCharacterLayer:: init()
 {
+
+	CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic(false); //¹Ø±ÕÔ­ÏÈµÄ±³¾°ÒôÀÖ
 	heroHealth = new Health();
 
 	enemyManager=new EnemyManager();
@@ -18,6 +20,9 @@ bool SPCharacterLayer:: init()
 	listener->onTouchEnded = CC_CALLBACK_2(SPCharacterLayer::onTouchEnded,this);
 	listener->setSwallowTouches(true);//²»ÏòÏÂ´«µÝ´¥Ãþ
 	dispatcher->addEventListenerWithSceneGraphPriority(listener,this);
+
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Music/fighting.mp3",true); //²¥·Å±³¾°ÒôÀÖ
+
 
 	//¶¨Ê±ÅÐ¶Ï½ÇÉ«×´Ì¬
 	this->schedule(schedule_selector(SPCharacterLayer::actionSchedule), (double)(AI::delta) / 100);
@@ -56,6 +61,7 @@ void SPCharacterLayer::onTouchEnded(Touch *touch, Event *unused_event){
 	posEnded = touch->getLocation();
 	Vec2 force=2*(posEnded-posBegan);
 	hero->applyImpulse(force);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/touch.wav"); //²¥·ÅÒôÐ§
 }
 
 void SPCharacterLayer::CheckResult(){
@@ -67,7 +73,10 @@ void SPCharacterLayer::CheckResult(){
 		}
 		else{
 			CCLOG("You lose!");
+			enemy_lives = INITIAL_LIVES;
 			this->getScene()->addChild(ResultLayer::create(Result::LOSE));
+				CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic(false); //¹Ø±Õ±³¾°ÒôÀÖ
+			unsigned int id = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/lost.wav"); //²¥·ÅÒôÐ§
 			Director::getInstance()->getRunningScene()->getPhysicsWorld()->setSpeed(0);
 		}
 	}
@@ -85,7 +94,10 @@ void SPCharacterLayer::CheckResult(){
 			}
 			else{
 				CCLOG("You win!");
+				hero_lives = INITIAL_LIVES;
 				this->getScene()->addChild(ResultLayer::create(Result::WIN));
+				CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic(false); //¹Ø±Õ±³¾°ÒôÀÖ
+				unsigned int id = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/win.wav"); //²¥·ÅÒôÐ§
 				Director::getInstance()->getRunningScene()->getPhysicsWorld()->setSpeed(0);
 			}
 			

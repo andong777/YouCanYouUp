@@ -27,6 +27,16 @@ bool HUDLayer::init(){
 
 	this->schedule(schedule_selector(HUDLayer::scheduleCallBack), 0.2f);
 
+	//返回按钮
+	auto returnItem = MenuItemImage::create(
+									"HUD/return.png",
+									"HUD/return_down.png",
+									CC_CALLBACK_1(HUDLayer::menuReturnCallback,this));
+	returnItem ->setPosition(Point(returnItem->getContentSize().width/2,returnItem->getContentSize().height/2));
+	auto menu = Menu::create(returnItem,NULL);
+	menu ->setPosition(Vec2::ZERO);
+	this->addChild(menu,1);
+
 	//血量接受
 	NotificationCenter::sharedNotificationCenter()->addObserver(this,callfuncO_selector(HUDLayer::getHealth),"getHealth",NULL);
 	//生命数损失
@@ -88,4 +98,10 @@ void HUDLayer::loseEnemyLife(Object* pSender){
 	Sprite* life = enemyLife.at(enemyLife.size()-1);
 	this->removeChild(life);
 	enemyLife.pop_back();
+}
+
+void HUDLayer::menuReturnCallback(Ref* pSender){
+	MainScene* game = MainScene::create();
+	TransitionScene *transition = TransitionFade::create(0.5, game);
+	Director::getInstance()->replaceScene(transition);
 }

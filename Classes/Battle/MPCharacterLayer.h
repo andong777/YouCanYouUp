@@ -4,7 +4,7 @@
 #include "CharacterLayer.h"
 #include "extensions/cocos-ext.h"
 #include "network/HttpClient.h"
-
+#include "SimpleAudioEngine.h"
 class MPCharacterLayer : public CharacterLayer, public cocos2d::network::WebSocket::Delegate
 {
 private:
@@ -43,4 +43,6 @@ public:
 	std::string enemyKey;
 
 	void initBattleScene(int tag);
+
+	void sendFightCmd(float fDelta);
 };

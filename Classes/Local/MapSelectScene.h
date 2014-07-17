@@ -4,7 +4,7 @@
 #include "CocosGUI.h" 
 #include "cocos2d.h"
 #include "GameSetting.h"
-
+#include "SimpleAudioEngine.h"
 class MapSelectScene : public cocos2d::Scene
 {
 public:
@@ -25,6 +25,7 @@ private:
 	// µØÍ¼°´Å¥
 	cocos2d::ui::Button * desertBtn;
 	cocos2d::ui::Button * forestBtn;
+	cocos2d::ui::Button * islandBtn;
 };
 
 

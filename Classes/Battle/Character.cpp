@@ -18,7 +18,7 @@ Character::Character(GameSetting::Character character)
 	body->getShape(0)->setRestitution(CharacterParameter::getRestitution(character));
 	
 	init();
-	
+	mass=body->getMass();
 
 }
 //没有图片的构造函数
@@ -28,6 +28,11 @@ Character::Character(){
 	sprite->setPhysicsBody(body);
    // sprite->setPosition(p);
 
+}
+
+//返回character的质量
+float Character::getMass(){
+	return mass;
 }
 
 void Character::init()
@@ -60,8 +65,9 @@ void Character::applyImpulse(Vec2 vec){
 	//vec.x*=200;
 	//vec.y*=200;
 	vec*= body->getMass()/2;
-	int temHealth=vec.length()/2000;
-	if(useHealth(10)) 
+	int temHealth=vec.length()/10000;
+	//CCLOG("%d",temHealth);
+	if(useHealth(5)) 
 		body->applyImpulse(vec);
 }
 

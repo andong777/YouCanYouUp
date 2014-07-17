@@ -21,6 +21,7 @@ bool HelpScene::init()
 
 void HelpScene::returnEvent(Ref *pSender, Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //²¥·ÅÒôÐ§
 	switch(type){
 	case Widget::TouchEventType::ENDED:
 		Director::getInstance()->popScene();

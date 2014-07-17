@@ -5,6 +5,7 @@
 #include "CocosGUI.h" 
 #include "extensions/cocos-ext.h"
 #include "network/HttpClient.h"
+#include "SimpleAudioEngine.h"
 
 class LoginScene : public cocos2d::Scene
 {

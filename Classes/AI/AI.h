@@ -18,8 +18,8 @@ protected:
 		//判断距离enemy近的box，通过这个判断方向
 	Vec2 getCloseVec(Vec2 now);
 
-	int leftup(Vec2 * v);
-
+	//判断方向
+	int judgeDir(Character * enmey,int i);
 
 public:
 
@@ -30,6 +30,9 @@ public:
 
 	//定义在该状态时的动作
 	virtual void action()=0;
+
+	//主要用于救命
+	void saveMe();
 
 	//定义离开该状态时采取的操作
 	virtual void exit()=0;
@@ -78,23 +81,20 @@ protected:
 	bool ready;	//判断信息是否获取
 
 
-	const static int NUM=10;
-	const static int posNum=10;  //记录位置的数量
-	std::list<Vec2> eList[NUM];   //存储enemy的前面的位置
-	std::list<Vec2> hList[NUM];    //存储hero前面的位置
-	int eListSize[NUM];      //存储eList的长度
-	int hListSize[NUM];   //存储hList的长度
+
 
 public:
 
 	const static int delta = 20;
 
+	
+
 	AI(ManagerInfo * info) : info(info), ready(false)
 	{
-		for(int i=0;i<NUM;i++)
+		for(int i=0;i<info->NUM;i++)
 		{
-			eListSize[i]=0;
-			hListSize[i]=0;
+			info->eListSize[i]=0;
+			info->hListSize[i]=0;
 		}
 	}
 
@@ -113,6 +113,9 @@ public:
 	void setReady(bool ready){
 		this->ready=ready;
 	}
+
+	bool getReady()
+	{return ready;}
 };
 
 #endif

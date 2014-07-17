@@ -4,6 +4,8 @@
 #include "Health.h"
 #include "AI/EnemyManager.h"
 
+#include "SimpleAudioEngine.h"
+
 class SPCharacterLayer : public CharacterLayer
 {
 private:

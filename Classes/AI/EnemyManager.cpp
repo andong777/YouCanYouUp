@@ -22,7 +22,11 @@ void EnemyManager::addEnemy(Character* enemy)
 void EnemyManager::getBodyInfo(Object * obj)
 {
 		info->setBodyInfo((BodyInfo *)obj);
-		ai->setReady(true);
+		if(ai->getReady()==false)
+		{
+			ai->setReady(true);
+			info->handleBodyInfo();
+		}
 		//CCLOG("BodyNum is = %d",bodyInfo->body.size());
 }
 

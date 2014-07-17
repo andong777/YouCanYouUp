@@ -21,6 +21,8 @@ public:
 private:
 	cocos2d::ui::ScrollView *list;
 
+	(cocos2d::ui::Text*) texts[5];
+
 };
 
 #endif // __RECORD_SCENE_H__

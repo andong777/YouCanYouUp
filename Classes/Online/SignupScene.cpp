@@ -1,5 +1,6 @@
 #include "SignupScene.h"
 #include "LoginScene.h"
+#include "MainScene.h"
 #include "CCSGUIReader.h"
 #include "Global.h"
 
@@ -34,15 +35,19 @@ bool SignupScene::init()
 
 void SignupScene::returnEvent(Ref *pSender, Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //播放音效
 	switch(type){
 	case Widget::TouchEventType::ENDED:
-		Director::getInstance()->popScene();
+		Scene *main = MainScene::create();
+		TransitionScene *transition = TransitionFade::create(0.5, main);
+		Director::getInstance()->replaceScene(transition);
 		break;
 	}	
 }
 
 void SignupScene::loginEvent(Ref *pSender, Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //播放音效
 	switch(type){
 	case Widget::TouchEventType::ENDED:
 		Scene *login = LoginScene::create();
@@ -54,6 +59,7 @@ void SignupScene::loginEvent(Ref *pSender, Widget::TouchEventType type)
 
 void SignupScene::signupEvent(Ref *pSender, Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //播放音效
 	switch(type){
 	case Widget::TouchEventType::ENDED:
 		std::string username_s = username->getStringValue();
@@ -73,6 +79,7 @@ void SignupScene::signupEvent(Ref *pSender, Widget::TouchEventType type)
 
 void SignupScene::onHttpRequestCompleted(HttpClient *sender, HttpResponse *response) 
 {
+
 	if(!response || !response->isSucceed())
 		return;
 
@@ -81,6 +88,12 @@ void SignupScene::onHttpRequestCompleted(HttpClient *sender, HttpResponse *respo
 	// 注册成功
 	if(res == '1')
 	{
+		// 加入用户信息
+		UserDefault *ud = UserDefault::getInstance();
+		ud->setStringForKey("username", username->getStringValue());
+		ud->setStringForKey("password", password->getStringValue());
+		ud->flush();
+
 		// 转到登录界面
 		Scene *login = LoginScene::create(); 
 		TransitionScene *transition = TransitionFade::create(0.5, login);

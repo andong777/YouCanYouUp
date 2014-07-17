@@ -11,17 +11,27 @@
   "designWidth": 960,
   "textures": [
     "OnlineUI1project0.plist",
-    "OnlineUI1project1.plist"
+    "OnlineUI1project1.plist",
+    "OnlineUI1project2.plist",
+    "OnlineUI1project3.plist"
   ],
   "texturesPng": [
     "OnlineUI1project0.png",
     "OnlineUI1project1.png",
+    "OnlineUI1project2.png",
+    "OnlineUI1project3.png",
     "OnlineUI1project0.png",
     "OnlineUI1project1.png",
+    "OnlineUI1project2.png",
+    "OnlineUI1project3.png",
     "OnlineUI1project0.png",
     "OnlineUI1project1.png",
+    "OnlineUI1project2.png",
+    "OnlineUI1project3.png",
     "OnlineUI1project0.png",
-    "OnlineUI1project1.png"
+    "OnlineUI1project1.png",
+    "OnlineUI1project2.png",
+    "OnlineUI1project3.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -155,14 +165,14 @@
               "ignoreSize": true,
               "layoutParameter": null,
               "opacity": 255,
-              "positionPercentX": -0.3854409,
-              "positionPercentY": 0.2600935,
+              "positionPercentX": -0.385416657,
+              "positionPercentY": 0.259375,
               "positionType": 0,
               "rotation": 0,
               "scaleX": 0.952004254,
               "scaleY": -0.7384516,
-              "sizePercentX": 0.071875,
-              "sizePercentY": 0.1109375,
+              "sizePercentX": 0.208333328,
+              "sizePercentY": 0.3125,
               "sizeType": 0,
               "tag": 24,
               "touchAble": true,

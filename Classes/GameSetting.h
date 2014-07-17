@@ -15,7 +15,7 @@ public:
 	enum class Map{
 		DESERT,
 		FOREST,
-		SNOW
+		ISLAND
 	};
 
 };

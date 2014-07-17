@@ -6,6 +6,7 @@
 #include "CocosGUI.h" 
 #include "Global.h"
 #include <vector>
+#include "MainScene.h"
 
 USING_NS_CC;
 
@@ -28,6 +29,9 @@ private:
 	void loseEnemyLife(Object* pSender);
 	void initHeroLife(int num);
 	void initEnemyLife(int num);
+
+	//°´Å¥¼àÌý
+	void menuReturnCallback(Ref* pSender);
 
 protected:
 

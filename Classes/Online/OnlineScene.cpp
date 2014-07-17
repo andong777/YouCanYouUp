@@ -37,6 +37,7 @@ bool OnlineScene::init()
 
 void OnlineScene::pvpEvent(Ref *pSender, Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //播放音效
 	switch(type){
 	case Widget::TouchEventType::ENDED:
 		Scene *loading = LoadingScene::create();
@@ -47,6 +48,7 @@ void OnlineScene::pvpEvent(Ref *pSender, Widget::TouchEventType type)
 
 void OnlineScene::recordEvent(Ref *pSender, Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //播放音效
 	switch(type){
 	case Widget::TouchEventType::ENDED:
 		Scene *record = RecordScene::create();
@@ -58,6 +60,7 @@ void OnlineScene::recordEvent(Ref *pSender, Widget::TouchEventType type)
 
 void OnlineScene::offlineEvent(Ref *pSender, Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //播放音效
 	switch(type){
 	case Widget::TouchEventType::ENDED:
 		Scene *login = LoginScene::create();
@@ -69,6 +72,7 @@ void OnlineScene::offlineEvent(Ref *pSender, Widget::TouchEventType type)
 
 void OnlineScene::returnEvent(Ref *pSender, Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //播放音效
 	switch(type){
 	case Widget::TouchEventType::ENDED:
 		Director::getInstance()->popScene();

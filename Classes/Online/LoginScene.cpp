@@ -2,6 +2,7 @@
 #include "CCSGUIReader.h"
 #include "SignupScene.h"
 #include "OnlineScene.h"
+#include "MainScene.h"
 #include "base/CCUserDefault.h"
 #include "Global.h"
 
@@ -36,15 +37,19 @@ bool LoginScene::init()
 
 void LoginScene::returnEvent(Ref *pSender, Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //播放音效
 	switch(type){
 	case Widget::TouchEventType::ENDED:
-		Director::getInstance()->popScene();
+		Scene *main = MainScene::create();
+		TransitionScene *transition = TransitionFade::create(0.5, main);
+		Director::getInstance()->replaceScene(transition);
 		break;
 	}	
 }
 
 void LoginScene::signupEvent(Ref *pSender, Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //播放音效
 	switch(type){
 	case Widget::TouchEventType::ENDED:
 		Scene *signup = SignupScene::create();
@@ -56,6 +61,7 @@ void LoginScene::signupEvent(Ref *pSender, Widget::TouchEventType type)
 
 void LoginScene::loginEvent(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //播放音效
 	switch(type){
 	case Widget::TouchEventType::ENDED:
 		std::string username_s = username->getStringValue();

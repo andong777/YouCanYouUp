@@ -4,7 +4,7 @@
 #include "CocosGUI.h" 
 #include "cocos2d.h"
 #include "GameSetting.h"
-
+#include "SimpleAudioEngine.h"
 class CharacterSelectScene : public cocos2d::Scene
 {
 public:

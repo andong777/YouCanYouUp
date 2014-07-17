@@ -3,7 +3,7 @@
 #include "Online\LoginScene.h"
 #include "HelpScene.h"
 #include "Local\CharacterSelectScene.h"
-
+#include "SimpleAudioEngine.h"
 USING_NS_CC;
 using namespace cocostudio;
 using namespace ui;
@@ -24,11 +24,14 @@ bool MainScene::init()
 	Button *help = (Button*)(ui::Helper::seekWidgetByName(pNode, "Help_btn"));
 	help->addTouchEventListener(CC_CALLBACK_2(MainScene::helpEvent, this));
 
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Music/bgMusic.mp3",true); //播放背景音乐
+
     return true;
 }
 
 void MainScene::singleEvent(Ref *pSender, Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //播放音效
 	switch(type){
 	case Widget::TouchEventType::ENDED:
 		Scene *menu = CharacterSelectScene::create();
@@ -40,6 +43,7 @@ void MainScene::singleEvent(Ref *pSender, Widget::TouchEventType type)
 
 void MainScene::onlineEvent(Ref *pSender, Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //播放音效
 	switch(type){
 	case Widget::TouchEventType::ENDED:
 		Scene *login = LoginScene::create();
@@ -51,6 +55,7 @@ void MainScene::onlineEvent(Ref *pSender, Widget::TouchEventType type)
 
 void MainScene::helpEvent(Ref *pSender, Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //播放音效
 	switch(type){
 	case Widget::TouchEventType::ENDED:
 		Scene *help = HelpScene::create(); 

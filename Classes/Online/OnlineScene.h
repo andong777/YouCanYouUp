@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "CocosGUI.h" 
 #include "2d/CCLabel.h"
+#include "SimpleAudioEngine.h"
 
 class OnlineScene : public cocos2d::Scene
 {

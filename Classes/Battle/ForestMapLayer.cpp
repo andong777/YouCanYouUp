@@ -18,6 +18,11 @@ bool ForestMapLayer:: init(){
 	this->addChild(edgeNode);
 	*/
 
+	//±³¾°
+	auto background = Sprite::create("Map/map3.jpg");
+	background->setPosition(visibleSize/2);
+	this->addChild(background);
+
 	//×ó£¬ÉÏ£¬ÓÒ±ß½ç
 	Vec2* edge =  new Vec2[4];
 	edge[0] = Vec2(0,0);

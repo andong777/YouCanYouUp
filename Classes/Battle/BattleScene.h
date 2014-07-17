@@ -2,7 +2,7 @@
 
 #include "cocos2d.h"
 #include "ForestMapLayer.h"
-#include "SnowMapLayer.h"
+#include "IslandMapLayer.h"
 #include "DesertMapLayer.h"
 #include "SPCharacterLayer.h"
 #include "MPCharacterLayer.h"
@@ -21,6 +21,6 @@ private:
 
 public:
 	//´´½¨³¡¾°
-	static Scene* createScene(bool online, GameSetting::Character hero, GameSetting::Map map, std::vector<GameSetting::Character> enemy, int initNum, std::string &enemyKey);
+	static Scene* createScene(bool online, GameSetting::Character hero, GameSetting::Map map, std::vector<GameSetting::Character> enemy);
 };
 

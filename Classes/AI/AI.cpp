@@ -1,19 +1,105 @@
 #include "AI.h"
 
+#define MIN(x,y)  (x<y?x:y)
+
 /**
-*	将points变成从左上角指针
+*  主要用于判断左右方向，不动返回0；向左返回1，向右返回2；
 */
-int StateNode::leftup(Vec2* v)
+int StateNode::judgeDir(Character * enemy,int i)
 {
-	int id=0;
-	for(int i=1;i<4;i++)
+	Vec2 now = enemy->getPosition();
+	std::list<Vec2>::iterator it =  (info->eList[i]).begin();
+	Vec2 tem= now-(*it);
+	if(tem.x<0)
+		return 1;
+	else if(tem.x>0)
+		return 2;
+	else
+		return 0;
+}
+
+/**
+*	保命要紧
+*/
+void StateNode::saveMe()
+{
+	double time = (double)AI::delta/100;
+
+	std::vector<Character*> & enemys=info->getEnemys();
+	int len= enemys.size();
+
+	for(int i=0;i<len;i++)
 	{
-		if(v[i].x<=v[id].x||v[i].y<=v[id].y)
+		Vec2 now = enemys[i]->getPosition();
+		std::list<Vec2>::iterator it=  (info->eList[i]).begin();
+		int tem=3;
+		while(tem--)
 		{
-			id=i;
+			it++;
+			if(it==(info->eList[i]).end())
+			{
+				it--;
+				break;
+			}
+		}
+		/*int ssize = (info->eList[i]).size();
+		CCLOG("  i:%d     size:%d",i,ssize);*/
+
+		
+		int jud=judgeDir(enemys[i],i);
+		if(jud==0)
+			continue;
+		
+		double speed = (now-(*it)).length()/(2*time);
+
+		int ll = (info->bodyPos).size();
+		double dis=1e8;
+		int id=-1;
+		int last=-1;
+		for(int i=0;i<len;i++)
+		{
+			if(info->isOK[i])
+			{
+				if(info->bodyPos[i].pos[1].y<now.y)
+				{
+					if(id==-1||dis<now.y-info->bodyPos[i].pos[1].y)
+					{
+						id=i;
+						dis=now.y-info->bodyPos[i].pos[1].y;
+					}
+				}
+				last=i;
+			}
+		}
+
+		if(id==-1)
+		{
+			CCLOG("always  id=-1  shit");
+
+			Vec2 teml1 = info->bodyPos[last].pos[1] - now;
+			Vec2 teml2= info->bodyPos[last].pos[2] - now;
+			if(teml1.length()<teml2.length())
+			{
+				teml1.x-=20;
+				teml1.y+=20;
+				enemys[i]->applyMove((teml1*20));
+			}	
+			else
+			{
+				teml2.x+=20;
+				teml2.y+=20;
+				enemys[i]->applyMove((teml2*20));
+			}
+		}
+		else if(jud == 1)
+		{
+			enemys[i]->applyMove(Vec2( 20 ,0));
+		}
+		else
+		{
+			enemys[i]->applyMove(Vec2( -20 ,0));
 		}
 	}
-	return id;
 }
 
 
@@ -21,53 +107,43 @@ int StateNode::leftup(Vec2* v)
 *  调用该函数首先分析自身位置和周围的着落点的距离，分析着落点四个边界点和该点的位置关系，然后返回一个较为理智的向量
 */
 Vec2  StateNode::getCloseVec(Vec2 now){
+
 	BodyInfo * bodyInfo = info->getBodyInfo();
-	
 	int len = bodyInfo->body.size();//着落点的数量
 	int id=-1;
 	double dis=1e8;
 	for(int i=0;i<len;i++)
 	{
-		if(bodyInfo->shape[i]==ShapeType::POLYGON)
+		if(bodyInfo->shape[i]==ShapeType::POLYGON && info->isOK[i])
 		{
-			
-			if(id==-1||dis>(bodyInfo->body[i]->getPosition()-now).length())
+			double l1= (double) ((info->bodyPos[i].pos[1]-now).length());
+			double l2 = (double)  ((info->bodyPos[i].pos[2]-now).length());
+			if(id==-1||dis > l1 || dis> l2 )
 			{
 				id=i;
-				dis=(bodyInfo->body[i]->getPosition()-now).length();
+				dis= MIN( l1, l2 );
 			}
 		}
 	}
 
 	if(id>0)
 	{
-		PhysicsShapePolygon * tem= (PhysicsShapePolygon*)(bodyInfo->body)[id]->getShape(0);
-		Vec2 * ppoints;
-		tem->getPoints(ppoints);
-		int id= leftup(ppoints);
 		
-		if(now.x>ppoints[id].x&&now.x<ppoints[(id+2)%4].x)
+		double l1= (double) ((info->bodyPos[id].pos[1]-now).length());
+		double l2 = (double)  ((info->bodyPos[id].pos[2]-now).length());
+		if(l1<l2)
 		{
-			if(now.y<ppoints[(id+1)%4].y)
-			{
-				if(now.x-ppoints[id].x<=ppoints[(id+2)%4].x-now.x)
-				{
-					return Vec2(ppoints[id].x-now.x,10);
-				}else
-				{
-					return Vec2(ppoints[(id+2)%4].x-now.x,10);
-				}
-			}
-			else
-			{
-				return Vec2((ppoints[id].x+ppoints[(id+2)%4].x)/2-now.x,0);
-			}
-		}else if(now.x<ppoints[id].x)
+			Vec2 ttt=info->bodyPos[id].pos[1]-now;
+			ttt.x-=20;
+			ttt.y+=20;
+			return ttt;
+		}
+		else
 		{
-			return Vec2(ppoints[id].x-now.x,ppoints[id].y-now.y);
-		}else
-		{
-			return Vec2(ppoints[(id+2)%4].x-now.x,ppoints[(id+2)%4].y-now.y);
+			Vec2 ttt=info->bodyPos[id].pos[2]-now;
+			ttt.x+=20;
+			ttt.y+=20;
+			return ttt;
 		}
 	}
 
@@ -80,7 +156,7 @@ void DefendStateNode::enter(){
 
 void DefendStateNode::action(){
 
-	//CCLOG("defend  action");
+	CCLOG("defend  action");
 	
 	/**
 	** 计算hero移动的方向是否朝向enemy，通过计算cos来判断     	
@@ -102,17 +178,16 @@ void DefendStateNode::action(){
 				y=-y;x=-x;
 			}
 			Vec2 tem(x,y);
-			enemy->applyImpulse(tem);
-
+			enemy->applyImpulse(tem*10);
 		}else
 		{
 			Vec2 tem=getCloseVec(tPos3);
-			enemy->applyImpulse(tem);
+			enemy->applyImpulse(tem*20);
 		}
 	}else
 	{
 		Vec2 tem=getCloseVec(tPos3);
-		enemy->applyImpulse(tem);
+		enemy->applyImpulse(tem*20);
 	}
 }
 
@@ -192,14 +267,19 @@ void AttackStateNode::enter(){
 
 void AttackStateNode::action(){
 
-	//CCLOG("attack  action");
+	CCLOG("attack  action");
 
 	if(info->getBodyInfo()==NULL)
 		return;
 
 	Vec2 tPos1 = info->getHero()->getPosition();
 	Vec2 tPos3 = enemy->getPosition();
-	enemy->applyImpulse(tPos1-tPos3);
+	if((tPos1-tPos3).length()<20)
+	{
+		enemy->applyImpulse((tPos1-tPos3)*20);
+	}
+	else
+		enemy->applyImpulse(tPos1-tPos3);
 }
 
 void AttackStateNode::exit(){
@@ -247,6 +327,7 @@ StateNode* AttackStateNode::changeState()
 }
 
 void StrategyStateNode::enter(){
+
 	
 	//CCLOG("我要采取策略了\n");
 
@@ -254,7 +335,7 @@ void StrategyStateNode::enter(){
 
 void StrategyStateNode::action(){
 
-	//CCLOG("strategy   action");
+	CCLOG("strategy   action");
 
 	if(info->getBodyInfo()==NULL)
 		return;
@@ -297,22 +378,30 @@ void AI::changeState()
 
 void AI::actions()
 {
+
 	std::vector<Character*> & enemys=info->getEnemys();
 	int len=states.size();
 
 	for(int i=0;i<len;i++)
 	{
 		Vec2 tPos = enemys[i]->getPosition();
-		if(eListSize[i] > posNum)
-			continue;
-		eList[i].push_back(tPos);
-		eListSize[i]++;
+		if(info->eListSize[i] > info->posNum)
+		{
+			info->eList[i].pop_front();
+			info->eListSize[i]--;
+		}
+		info->eList[i].push_back(tPos);
+		info->eListSize[i]++;
 	}
+
 	if(!ready)
 		return;
 
+
+	
 	for(int i=0;i<len;i++)
 	{
+		states[i]->saveMe();
 		states[i]->action();
 	}
 }

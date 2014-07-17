@@ -40,24 +40,9 @@ void LoadingScene::onMessage(cocos2d::network::WebSocket* ws, const cocos2d::net
     std::string cmdStr = CmdTool::getCmd(msgStr);
     std::string cmdPara = CmdTool::getCmdPara(msgStr);
 
-	// ---------- 建立连接匹配对手 ----------
-	std::string enemyKey;
-	int initNum = 0;
-    if (cmdStr == "enemy0") {
-        CCLOG("匹配到对手，对手Key=%s",cmdPara.c_str());
-        enemyKey = cmdPara;
-		initNum = 0;
-    }
-    
-    if (cmdStr == "enemy1") {
-        CCLOG("匹配到对手，对手Key=%s",cmdPara.c_str());
-        enemyKey = cmdPara;
-		initNum = 1;
-    }
 	std::vector<GameSetting::Character> enemy;
 	enemy.push_back(GameSetting::Character::CHARACTER2);
-
-    Scene *game = BattleScene::createScene(true, GameSetting::Character::CHARACTER1, GameSetting::Map::DESERT, enemy, initNum, enemyKey);
+    Scene *game = BattleScene::createScene(true, GameSetting::Character::CHARACTER1, GameSetting::Map::DESERT, enemy);
 	TransitionScene *transition = TransitionFade::create(0.5, game);
 	Director::getInstance()->replaceScene(transition);
 }

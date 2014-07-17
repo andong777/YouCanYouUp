@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 #include "CocosGUI.h"
-
+#include "SimpleAudioEngine.h"
 class HelpScene : public cocos2d::Scene
 {
 public:

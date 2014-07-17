@@ -27,6 +27,7 @@ bool CharacterSelectScene::init()
 
 void CharacterSelectScene::selectEvent(Ref *pSender, Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //播放音效
 	switch(type)
 	{
 	case Widget::TouchEventType::ENDED:
@@ -52,6 +53,7 @@ void CharacterSelectScene::selectEvent(Ref *pSender, Widget::TouchEventType type
 
 void CharacterSelectScene::returnEvent(Ref *pSender, Widget::TouchEventType type)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/button.wav"); //播放音效
 	switch(type){
 	case Widget::TouchEventType::ENDED:
 		Director::getInstance()->popScene();

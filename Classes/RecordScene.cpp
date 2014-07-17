@@ -25,10 +25,17 @@ bool RecordScene::init()
 
 	//找到list
 	list = (ScrollView*)(ui::Helper::seekWidgetByName(pNode, "List"));
-	list->removeAllChildren();
-	float innerWidth = list->getSize().width;
-	float innerHeight = list->getSize().height;
-	list->setInnerContainerSize(Size(innerWidth, innerHeight));
+	//list->removeAllChildren();
+
+	/*list = ScrollView::create();
+	list->setPosition(Vec2::ZERO);
+	list->setContentSize(visibleSize);*/
+
+	for(int i=0;i<5;i++){
+		texts[i] = (Text*)(ui::Helper::seekWidgetByName(pNode, "Label"+i));
+
+	}
+
 
 	// 从服务器读取排名并写入list
 	CCLOG("GET-GetScore");
@@ -64,23 +71,27 @@ void RecordScene::onHttpRequestCompleted(HttpClient *sender, HttpResponse *respo
 		ss << (*buffer)[i];
 	}
 	rapidjson::Document doc;  
-	doc.Parse<rapidjson::kParseDefaultFlags>(ss.str().c_str());  
+	CCLOG(ss.str().c_str());
 
-	Layer *contentLayer = Layer::create();
-	for(int i=0;i<doc.Size();i++)  
+
+	doc.Parse<rapidjson::kParseDefaultFlags>(ss.str().c_str());  
+	for(int i=0;i<5;i++)  
     {   
         rapidjson::Value &v=doc[i];  
+          
+        std::string username;
+		std::string score;
             
         if(v.HasMember("username") && v.HasMember("score"))  
         {   
-            std::string username = v["username"].GetString();  
-            std::string score = v["score"].GetString();  
+            username = v["username"].GetString();  
+            score = v["score"].GetString();  
+            
+			
+			texts[i]->setText(username + ": " + score);		
 
-			Text *text = Text::create();
-			text->setPosition(Vec2(0, i*list->getSize().height / doc.Size()));
-			text->setText(username + ": " + score);
-			list->getInnerContainer()->addChild(text);
         }  
+  
 
     }  
 }  

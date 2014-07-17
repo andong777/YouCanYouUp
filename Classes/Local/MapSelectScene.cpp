@@ -18,15 +18,19 @@ bool MapSelectScene::init()
 	Button *return_ = (Button*)(ui::Helper::seekWidgetByName(pNode, "Button_1"));
 	desertBtn = (Button*)(ui::Helper::seekWidgetByName(pNode, "Button_3"));
 	forestBtn = (Button*)(ui::Helper::seekWidgetByName(pNode, "Button_4"));
+	islandBtn = (Button*)(ui::Helper::seekWidgetByName(pNode, "Button_5"));
 
 	desertBtn->addTouchEventListener(CC_CALLBACK_2(MapSelectScene::selectEvent, this));
 	forestBtn->addTouchEventListener(CC_CALLBACK_2(MapSelectScene::selectEvent, this));
+	islandBtn->addTouchEventListener(CC_CALLBACK_2(MapSelectScene::selectEvent, this));
+
 	return_->addTouchEventListener(CC_CALLBACK_2(MapSelectScene::returnEvent, this));
 	return true;
 }
 
 void MapSelectScene::selectEvent(Ref *pSender, Widget::TouchEventType type)
 {
+
 	switch(type)
 	{
 	case Widget::TouchEventType::ENDED:
@@ -37,10 +41,13 @@ void MapSelectScene::selectEvent(Ref *pSender, Widget::TouchEventType type)
 		else if(pSender == forestBtn)
 		{
 			mapSelected = GameSetting::Map::FOREST;
+		}else if(pSender == islandBtn)
+		{
+			mapSelected = GameSetting::Map::ISLAND;
 		}
 		std::vector<GameSetting::Character> enemy;
 		enemy.push_back(GameSetting::Character::CHARACTER2);
-		Scene *game = BattleScene::createScene(false, charSelected, mapSelected, enemy, 0, std::string());
+		Scene *game = BattleScene::createScene(false, charSelected, mapSelected, enemy);
 		TransitionScene *transition = TransitionFade::create(0.5, game);
 		Director::getInstance()->replaceScene(transition);
 	}

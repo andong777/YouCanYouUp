@@ -13,6 +13,8 @@ private:
 	//角色体力
 	int health;
 
+	float mass;
+
 	//角色上次受力
 	//Vec2 lastForce;
 
@@ -33,6 +35,14 @@ public:
 	PhysicsBody* getBody();
 	//给刚体叠加一个速度
 	void applyImpulse(Vec2 vec);
+
+	void applyMove(Vec2 vec){
+		vec = vec/vec.length();
+		applyImpulse(vec*500);
+	}
+
+	//获取质量
+	float getMass();
 
 	//返回角色位置
 	Vec2 getPosition();

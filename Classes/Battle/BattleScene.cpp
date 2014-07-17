@@ -2,7 +2,7 @@
 
 USING_NS_CC;
 
-Scene* BattleScene::createScene(bool online, GameSetting::Character hero, GameSetting::Map map, std::vector<GameSetting::Character> enemy, int initNum, std::string &enemyKey){
+Scene* BattleScene::createScene(bool online, GameSetting::Character hero, GameSetting::Map map, std::vector<GameSetting::Character> enemy){
 	//创建场景 
 	auto scene = Scene::createWithPhysics();
 	//创建场景层
@@ -12,7 +12,6 @@ Scene* BattleScene::createScene(bool online, GameSetting::Character hero, GameSe
 	if(online)
 	{
 		characterLayer = MPCharacterLayer::create();
-		((MPCharacterLayer*)characterLayer)->enemyKey = enemyKey;
 	}
 	else
 	{
@@ -22,11 +21,6 @@ Scene* BattleScene::createScene(bool online, GameSetting::Character hero, GameSe
 	characterLayer->setHero(hero);
 	characterLayer->setEnemy(enemy);
 
-	if(online)
-	{
-		((MPCharacterLayer*)characterLayer)->initBattleScene(initNum);
-	}
-	
 	auto uiLayer = HUDLayer::create();
 
 	//将层添加到场景中
@@ -51,8 +45,8 @@ Layer* BattleScene::selectMap(GameSetting::Map map){
 	if(map==GameSetting::Map::FOREST){
 		return ForestMapLayer::create();
 	}
-	if(map==GameSetting::Map::SNOW){
-		return SnowMapLayer::create();
+	if(map==GameSetting::Map::ISLAND){
+		return IslandMapLayer::create();
 	}
 	if(map==GameSetting::Map::DESERT){
 		return DesertMapLayer::create();
